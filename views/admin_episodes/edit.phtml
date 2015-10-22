@@ -1,0 +1,15 @@
+<div style="float: right;">
+	<strong><a href="<?= ADMIN_ROOT ?>">Cancel</a></strong>
+</div>
+
+<h3>Edit Episode <?= h($episode->episode) ?></h3>
+
+<div class="box wide">
+	<? $form->form_for($C->episode, ADMIN_ROOT . "episodes/update/" .
+	$episode->episode, array(), function($f) use ($C) { ?>
+		<?= $C->render(array("partial" => "form"), array("f" => $f)); ?>
+		<p>
+		<?= $f->submit_tag("Update"); ?>
+		</p>
+	<? }); ?>
+</div>

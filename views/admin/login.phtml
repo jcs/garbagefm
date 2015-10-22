@@ -1,0 +1,19 @@
+<fieldset class="box">
+	<legend>Login</legend>
+
+	<? $form->form_tag(array("action" => "auth"), array(), function($f)
+	use ($html) { ?>
+		<?= $html->flash_errors(); ?>
+        <?= $html->flash_notices(); ?>
+
+		<?= $f->label_tag("username", "Username"); ?>
+		<?= $f->text_field_tag("username", "", array("size" => 20)); ?>
+		<br />
+
+		<?= $f->label_tag("password", "Password:"); ?>
+		<?= $f->password_field_tag("password", "", array("size" => 20)); ?>
+		<br />
+
+		<?= $f->submit_tag("Login"); ?>
+	<? }); ?>
+</fieldset>

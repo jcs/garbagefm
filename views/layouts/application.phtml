@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title><?= h($C->page_title) ?></title>
+		<link rel="shortcut icon" href="/garbage.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="canonical" href="<?= h($C->canonical) ?>"/>
+		<link rel="alternate" type="application/rss+xml" title="RSS Feed"
+			href="<?= $C->settings()->url ?>episodes.rss"/>
+		<style>
+			body {
+				font-family: Ubuntu Mono Regular, inconsolata,
+					American Typewriter, courier new, monospace;
+				font-size: 10pt;
+				color: #333;
+				background-color: #fcfcfc;
+			}
+
+			a {
+				color: #1888ad;
+				display: inline-block;
+			}
+			a:visited {
+				color: #6f96a3;
+			}
+
+			.lead {
+				margin-top: 5em;
+				text-align: center;
+			}
+
+			.lead .show_title {
+				font-size: 14pt;
+				margin-bottom: 1em;
+			}
+
+			.lead .show_title a,
+			.lead .logo a {
+				text-decoration: none;
+				color: #333;
+			}
+
+			.episodes {
+				margin: 3em auto 5em auto;
+				width: 600px;
+			}
+
+			.episodes hr {
+				border: 0;
+				height: 1px;
+				border-top: 1px solid lightgray;
+				margin-top: 3em;
+				margin-bottom: 3em;
+				width: 50%;
+			}
+
+			.episode .date {
+				color: gray;
+				font-size: 9pt;
+			}
+
+			.episode .title {
+				font-size: 11pt;
+				text-align: center;
+				margin-bottom: 1em;
+			}
+
+			.episode audio,
+			.episode .download {
+				margin-left: auto;
+				margin-right: auto;
+				display: block;
+				width: 500px;
+			}
+			.episode .download {
+				margin-top: 0.5em;
+				text-align: right;
+				font-size: 8pt;
+			}
+
+			@media only screen and (max-width: 480px) {
+				.episodes {
+					width: 99%;
+				}
+
+				.episode audio,
+				.episode .download {
+					width: 95%;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="lead">
+			<div class="show_title">
+				<a href="/"><?= h($C->settings()->name) ?></a>
+			</div>
+
+			<div class="logo">
+				<a href="/"><img src="/garbage-128.png" width=128 height=128></a>
+			</div>
+
+			<p>
+			<?= h($C->settings()->description) ?><br>
+			by
+			<a href="https://twitter.com/knowmercymod">Brandon Mercer</a>
+			and
+			<a href="https://jcs.org/">joshua stein</a>
+			</p>
+
+			<p>
+			<a href="/episodes">Episodes</a>
+			|
+			<a href="/episodes.rss">RSS</a>
+			|
+			<a href="<?= h($C->settings()->itunes_url) ?>">iTunes</a>
+			|
+			<a href="https://twitter.com/garbagefm">Twitter</a>
+			|
+			<a href="mailto:<?= h($C->settings()->contact_email) ?>">E-mail</a>
+			</p>
+		</div>
+
+		<?php echo $content_for_layout; ?>
+	</body>
+</html>

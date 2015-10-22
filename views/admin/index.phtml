@@ -1,0 +1,47 @@
+<h3>Episodes (<a href="<?= ADMIN_ROOT ?>episodes/build">Create New</a>)</h3>
+
+<ul>
+<? foreach ($C->episodes as $episode) { ?>
+	<li><a href="<?= ADMIN_ROOT ?>episodes/edit/<?= $episode->episode ?>"><?=
+		$episode->episode ?>: <?= h($episode->title) ?></a>
+		(<?= $episode->air_date->format("Y-m-d") ?>)
+		<? if ($episode->is_pending) { ?>
+			(<strong>PENDING</strong>)
+		<? } ?>
+<? } ?>
+</ul>
+
+<p>
+<h3>Upcoming Show Notes/Scratch</h3>
+</p>
+
+<div class="box">
+	<? $form->form_tag(ADMIN_ROOT . "update_notes", array(),
+	function($f) use ($C) { ?>
+		<div class="boxline">
+			<?= $f->label_tag("upcoming_notes", $C->user->username . ":",
+				array("class" => "required")); ?>
+			<?= $f->text_area_tag("upcoming_notes", $C->user->upcoming_notes,
+				array("class" => "variable",
+				"style" => "width: 75%; height: 10em; font-size: 8pt;")); ?>
+			<br>
+			<?= $f->submit_tag("Save"); ?>
+		</div>
+	<? }); ?>
+
+	<? foreach (
+	User::find("all", array("conditions" => array("id <> ?", $C->user->id))) as
+	$other_user) { ?>
+		<br>
+		<div class="boxline">
+			<label class="required"><?= h($other_user->username) ?>:</label>
+			<div class="d">
+			<? if ($other_user->upcoming_notes == "") { ?>
+				<span class="na">No notes entered.</span>
+			<? } else { ?>
+				<?= nl2br(h($other_user->upcoming_notes)) ?>
+			<? } ?>
+			</div>
+		</div>
+	<? } ?>
+</div>

@@ -1,0 +1,80 @@
+<?= $html->error_messages_for($episode); ?>
+
+<div class="boxline">
+<?= $f->label("episode", "Episode Number:", array("class" => "required")); ?>
+<?= $f->text_field("episode", array("style" => "width: 2em;")); ?>
+</div>
+
+<div class="boxline">
+<?= $f->label("is_pending", "Pending:", array("class" => "required")); ?>
+<?= $f->check_box("is_pending") ?> (Will not show up on the website or RSS
+feeds)
+</div>
+
+<div class="boxline">
+<?= $f->label("air_date", "Date:", array("class" => "required")); ?>
+<?= $f->text_field("air_date", array("style" => "width: 300px;",
+	"value" => $f->form_object->air_date->format("Y-m-d H:i"))); ?>
+</div>
+
+<div class="boxline">
+<?= $f->label("title", "Title:", array("class" => "required")); ?>
+<?= $f->text_field("title", array("style" => "width: 300px;")); ?>
+</div>
+
+<div class="boxline">
+<?= $f->label("summary", "Summary:", array("class" => "required")); ?>
+<?= $f->text_field("summary", array("style" => "width: 500px;")); ?>
+</div>
+
+<div class="boxline">
+<?= $f->label("is_explicit", "Explicit Content:", array("class" => "required")); ?>
+<?= $f->check_box("is_explicit") ?>
+</div>
+
+<div class="boxline">
+<?= $f->label("duration_secs", "Duration:", array("class" => "required")); ?>
+<?= $f->text_field("duration_secs", array("style" => "width: 5em;")) ?>
+	(seconds)
+</div>
+
+<div class="boxline">
+<?= $f->label("filesize", "File size:", array("class" => "required")); ?>
+<?= $f->text_field("filesize", array("style" => "width: 5em;")) ?> (bytes)
+</div>
+
+<div class="boxline">
+<?= $f->label("notes", "Show Notes:", array("class" => "required")); ?>
+</div>
+<div class="boxline">
+<?= $f->text_area("notes", array("class" => "fixed",
+	"style" => "width: 375px; height: 275px; font-size: 7pt;")); ?>
+<div id="markdown_preview" style="background-color: #fafafa; width: 375px;
+	height: 275px; border: 1px solid gray; display: inline-block;
+	margin-left: 10px; padding: 4px; overflow: auto;"></div>
+</div>
+
+<script>
+var update_running = false;
+function update_preview() {
+	if (update_running)
+		return;
+	else
+		update_running = true;
+
+	new Ajax.Updater("markdown_preview", "<?= ADMIN_ROOT ?>episodes/md_preview", {
+		method: "post",
+		parameters: {
+			"preview_text": $("episode_notes").value,
+			"authenticity_token" : "<?= $C->form_authenticity_token() ?>",
+		},
+		onComplete: function() { update_running = false; },
+	});
+}
+
+new Form.Element.Observer("episode_notes", 0.5,
+	function(el, value) { update_preview(); });
+
+update_preview();
+
+</script>

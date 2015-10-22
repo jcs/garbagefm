@@ -1,0 +1,52 @@
+<?='<?'?>xml version="1.0" encoding="UTF-8"<?='?>'?>
+
+<rss xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	version="2.0">
+<channel>
+	<title><?= h($C->settings()->name) ?></title>
+	<link><?= h($C->settings()->url) ?></link>
+	<atom:link href="<?= h($C->settings()->url) ?>episodes.rss" rel="self" type="application/rss+xml"/>
+	<lastBuildDate><?= date("r"); ?></lastBuildDate>
+	<language>en-US</language>
+	<itunes:author><?= h($C->settings()->hosts) ?></itunes:author>
+	<itunes:subtitle><?= h($C->settings()->description) ?></itunes:subtitle>
+	<itunes:summary><?= h($C->settings()->description) ?></itunes:summary>
+	<description><?= h($C->settings()->description) ?></description>
+	<itunes:explicit>no</itunes:explicit>
+	<itunes:keywords><?= h($C->settings()->keywords) ?></itunes:keywords>
+	<itunes:owner>
+		<itunes:name><?= h($C->settings()->contact_email) ?></itunes:name>
+		<itunes:email><?= h($C->settings()->contact_email) ?></itunes:email>
+	</itunes:owner>
+	<itunes:category text="Technology"/>
+	<itunes:image href="<?= h($C->settings()->logo_url) ?>"/>
+	<? foreach ($C->episodes as $episode) { ?>
+		<item>
+			<title>garbage[<?= h($episode->episode) ?>]: <?= h($episode->title) ?></title>
+			<pubDate><?= $episode->air_date->format("r") ?></pubDate>
+			<link><?= h($episode->absolute_url()) ?></link>
+			<guid isPermaLink="false"><?= h($episode->absolute_url()) ?></guid>
+			<description><![CDATA[
+				<?= $episode->notes_html() ?>
+				<p>
+				We welcome your feedback at <a
+				href="https://twitter.com/garbagefm">@garbagefm</a> on Twitter
+				and at <a href="http://garbage.fm/">http://garbage.fm</a>
+				</p>
+			]]></description>
+			<dc:creator><?= h($C->settings()->hosts) ?></dc:creator>
+			<itunes:author><?= h($C->settings()->hosts) ?></itunes:author>
+			<itunes:summary><?= h($episode->summary) ?></itunes:summary>
+			<itunes:explicit><?= $episode->is_explicit ? "yes" : "no" ?></itunes:explicit>
+			<itunes:duration><?= h($episode->duration_secs) ?></itunes:duration>
+			<itunes:image href="<?= h($episode->artwork_url()) ?>"/>
+			<enclosure url="<?= h($episode->mp3_url()) ?>"
+				length="<?= h($episode->filesize) ?>" type="audio/mpeg"/>
+		</item>
+	<? } ?>
+</channel>
+</rss>

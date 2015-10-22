@@ -1,0 +1,58 @@
+<div style="float: right;">
+	<strong><a href="<?= ADMIN_ROOT ?>">Cancel</a></strong>
+</div>
+
+<h3>Edit Show Settings</h3>
+
+<div class="box wide">
+	<? $form->form_for($C->settings, ADMIN_ROOT . "update_show_settings",
+	array(), function($f) use ($C) { ?>
+		<div class="boxline">
+		<?= $f->label("name", "Show Name:", array("class" => "required")); ?>
+		<?= $f->text_field("name") ?>
+		</div>
+
+		<div class="boxline">
+		<?= $f->label("url", "Main URL:", array("class" => "required")); ?>
+		<?= $f->text_field("url") ?>
+		<span class="hint">Must have trailing slash</span>
+		</div>
+
+		<div class="boxline">
+		<?= $f->label("contact_email", "Contact E-mail:",
+			array("class" => "required")); ?>
+		<?= $f->text_field("contact_email") ?>
+		</div>
+
+		<div class="boxline">
+		<?= $f->label("hosts", "Show Hosts:", array("class" => "required")); ?>
+		<?= $f->text_field("hosts", array("style" => "width: 400px;")) ?>
+		</div>
+
+		<div class="boxline">
+		<?= $f->label("description", "Description:",
+			array("class" => "required")); ?>
+		<?= $f->text_field("description", array("style" => "width: 400px;")) ?>
+		</div>
+
+		<div class="boxline">
+		<?= $f->label("keywords", "Keywords:", array("class" => "required")); ?>
+		<?= $f->text_area("keywords", array("class" => "variable")) ?>
+		</div>
+
+		<div class="boxline">
+		<?= $f->label("logo_url", "Logo URL:", array("class" => "required")); ?>
+		<?= $f->text_field("logo_url", array("style" => "width: 400px;")) ?>
+		</div>
+
+		<div class="boxline">
+		<?= $f->label("itunes_url", "iTunes URL:",
+			array("class" => "required")); ?>
+		<?= $f->text_field("itunes_url", array("style" => "width: 400px;")) ?>
+		</div>
+
+		<p>
+		<?= $f->submit_tag("Update"); ?>
+		</p>
+	<? }); ?>
+</div>

@@ -1,0 +1,23 @@
+<div class="episode">
+	<div class="title">
+		<a href="<?= h($episode->absolute_url()) ?>">
+			garbage[<?= h($episode->episode) ?>]: <?= h($episode->title) ?>
+		</a>
+		<div class="date">
+			<?= $episode->air_date->format("F jS, Y") ?>
+		</div>
+	</div>
+
+	<audio controls>
+		<source src="<?= h($episode->mp3_url()) ?>" type="audio/mpeg">
+		Your browser does not support the audio element -
+	</audio>
+	<div class="download">
+		<a href="<?= h($episode->mp3_url()) ?>">Download
+			(<?= $helper->bytes_h($episode->filesize) ?>)</a>
+	</div>
+
+	<div class="notes">
+		<?= $episode->notes_html() ?>
+	</div>
+</div>

@@ -1,0 +1,10 @@
+<div class="episodes">
+	<? foreach ($episodes as $episode) { ?>
+		<?= $C->render(array("partial" => "episode"),
+			array("episode" => $episode)); ?>
+
+		<? if (count($episodes) > 1 && $episode->episode > 0) { ?>
+			<hr>
+		<? } ?>
+	<? } ?>
+</div>
