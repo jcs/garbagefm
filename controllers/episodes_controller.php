@@ -18,6 +18,9 @@ class EpisodesController extends ApplicationController {
 
 	public function show() {
 		$this->episode = Episode::find_by_episode($this->params["id"]);
+
+		$this->page_title = $this->episode->episode . ": "
+			. $this->episode->title;
 	}
 }
 
