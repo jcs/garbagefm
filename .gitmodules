@@ -7,3 +7,6 @@
 [submodule "lib/otphp"]
 	path = lib/otphp
 	url = git@github.com:Spomky-Labs/otphp.git
+[submodule "lib/parsedown"]
+	path = lib/parsedown
+	url = git@github.com:erusev/parsedown.git
