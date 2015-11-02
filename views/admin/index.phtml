@@ -1,16 +1,3 @@
-<h3>Episodes (<a href="<?= ADMIN_ROOT ?>episodes/build">Create New</a>)</h3>
-
-<ul>
-<? foreach ($C->episodes as $episode) { ?>
-	<li><a href="<?= ADMIN_ROOT ?>episodes/edit/<?= $episode->episode ?>"><?=
-		$episode->episode ?>: <?= h($episode->title) ?></a>
-		(<?= $episode->air_date->format("Y-m-d") ?>)
-		<? if ($episode->is_pending) { ?>
-			(<strong>PENDING</strong>)
-		<? } ?>
-<? } ?>
-</ul>
-
 <p>
 <h3>Upcoming Show Notes/Scratch</h3>
 </p>
@@ -45,3 +32,17 @@
 		</div>
 	<? } ?>
 </div>
+
+<h3>Past Episodes (<a href="<?= ADMIN_ROOT ?>episodes/build">Create New</a>)</h3>
+
+<ul>
+<? foreach ($C->episodes as $episode) { ?>
+	<li><a href="<?= ADMIN_ROOT ?>episodes/edit/<?= $episode->episode ?>"><?=
+		$episode->episode ?>: <?= h($episode->title) ?></a>
+		(<?= $episode->air_date->format("Y-m-d") ?>)
+		<? if ($episode->is_pending) { ?>
+			(<strong>PENDING</strong>)
+		<? } ?>
+<? } ?>
+</ul>
+

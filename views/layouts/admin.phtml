@@ -6,16 +6,16 @@
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<link rel="shortcut icon" href="/garbage.png" />
-	<?php echo $html->stylesheet_link_tag(array("application")); ?>
-	<?php echo $html->javascript_include_tag(array("prototype")); ?>
+	<?= $html->stylesheet_link_tag(array("application")); ?>
+	<?= $html->javascript_include_tag(array("prototype")); ?>
 </head>
 <body>
 	<div id="wrapper">
 		<div id="header">
 			<div id="headerright">
-				<? if ($controller->user) { ?>
+				<? if ($C->user) { ?>
 					Logged in as
-					<?= h($controller->user->username); ?>
+					<?= h($C->user->username); ?>
 					<br>
 					<?= $html->link_to("Logout",
 						array("controller" => "admin", "action" => "logout"),
@@ -26,8 +26,8 @@
 				<? } ?>
 			</div>
 
-			<h1><a href="<?= ADMIN_ROOT ?>"><?= h($C->settings()->name) ?>
-				- Administration</a></h1>
+			<h2><a href="<?= ADMIN_ROOT ?>"><?= h($C->settings()->name) ?>
+				- Administration</a></h2>
 
 			<div class="clear"></div>
 		</div>

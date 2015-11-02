@@ -35,12 +35,22 @@ feeds)
 <div class="boxline">
 <?= $f->label("duration_secs", "Duration:", array("class" => "required")); ?>
 <?= $f->text_field("duration_secs", array("style" => "width: 5em;")) ?>
-	(seconds)
+	seconds
 </div>
 
+<? if ($f->form_object->id) { ?>
+	<div class="boxline">
+	<?= $f->label("filesize", "File size:", array("class" => "required")); ?>
+	<span class="d">
+		<?= $helper->bytes_h($f->form_object->filesize) ?> bytes
+	</span>
+	</div>
+<? } ?>
+
 <div class="boxline">
-<?= $f->label("filesize", "File size:", array("class" => "required")); ?>
-<?= $f->text_field("filesize", array("style" => "width: 5em;")) ?> (bytes)
+<?= $f->label("new_mp3", ($f->form_object->id ? "Replace " : "")
+	. "MP3 file:", array("class" => "required")); ?>
+<?= $f->file_field("new_mp3") ?>
 </div>
 
 <div class="boxline">

@@ -28,10 +28,10 @@
 		<item>
 			<title>garbage[<?= h($episode->episode) ?>]: <?= h($episode->title) ?></title>
 			<pubDate><?= $episode->air_date->format("r") ?></pubDate>
-			<link><?= h($episode->absolute_url()) ?></link>
-			<guid isPermaLink="false"><?= h($episode->absolute_url()) ?></guid>
+			<link><?= h($episode->absolute_url) ?></link>
+			<guid isPermaLink="false"><?= h($episode->absolute_url) ?></guid>
 			<description><![CDATA[
-				<?= $episode->notes_html() ?>
+				<?= $episode->notes_html ?>
 				<p>
 				We welcome your feedback at <a
 				href="https://twitter.com/garbagefm">@garbagefm</a> on Twitter
@@ -43,8 +43,8 @@
 			<itunes:summary><?= h($episode->summary) ?></itunes:summary>
 			<itunes:explicit><?= $episode->is_explicit ? "yes" : "no" ?></itunes:explicit>
 			<itunes:duration><?= h($episode->duration_secs) ?></itunes:duration>
-			<itunes:image href="<?= h($episode->artwork_url()) ?>"/>
-			<enclosure url="<?= h($episode->mp3_url()) ?>"
+			<itunes:image href="<?= h($episode->artwork_url) ?>"/>
+			<enclosure url="<?= h($episode->mp3_url) ?>"
 				length="<?= h($episode->filesize) ?>" type="audio/mpeg"/>
 		</item>
 	<? } ?>

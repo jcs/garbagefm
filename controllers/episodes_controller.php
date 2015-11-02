@@ -1,11 +1,13 @@
 <?php
 
 class EpisodesController extends ApplicationController {
+	static $caches_page = array("index", "show", "rss");
+
 	public function index() {
 		$this->episodes = Episode::find("all",
 			array("order" => "episode DESC"));
 
-		$this->render(array("action" => "index"));
+		$this->page_title = "Episodes";
 	}
 
 	public function rss() {

@@ -215,13 +215,14 @@ div#subheader {
 }
 div#subheader a {
 	color: gray;
+	font-weight: bold;
 }
 
-div#header h1 {
+div#header h2 {
 	margin: 0px;
 	padding: 0px;
 }
-div#header h1 a {
+div#header h2 a {
 	color: white;
 	text-decoration: none;
 }
@@ -247,6 +248,7 @@ div#footer {
 	margin-top: 2em;
 	padding-top: 1em;
 	padding-bottom: 2em;
+	text-align: right;
 }
 div#footer a {
 	color: gray;
