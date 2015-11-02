@@ -28,6 +28,16 @@ class ApplicationController extends HalfMoon\ApplicationController {
 
 		return $this->_settings;
 	}
+
+	public function hosts() {
+		$users = User::find("all");
+
+		usort($users, function ($a, $b) {
+			return strnatcasecmp($a->full_name, $b->full_name);
+		});
+
+		return $users;
+	}
 }
 
 ?>

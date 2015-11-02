@@ -396,6 +396,28 @@ table.data tr.void td, table.data tr.void td a {
 	padding: 3px 5px 3px 5px;
 }
 
+
+fieldset.box {
+	border: 1px solid #cacaca;
+	padding: 4px 8px 8px 8px;
+}
+fieldset.box legend {
+	border: 2px solid gray;
+	background-color: white;
+	padding: 4px 8px;
+	font-weight: bold;
+}
+fieldset.box .boxtitle {
+	background-color: #f0f0f0;
+	border-bottom: 1px solid #cacaca;
+	display: block;
+	font-weight: bold;
+	margin: -3px -7px 4px -7px;
+	padding: 3px 5px 3px 5px;
+}
+
+
+
 .box label,
 .box .label_holder {
 	display: block;
@@ -439,6 +461,7 @@ table.data tr.void td, table.data tr.void td a {
 }
 .box div.d {
 	margin-left: 7em;
+	line-height: 2em;
 }
 
 .box input.normal,

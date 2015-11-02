@@ -57,9 +57,17 @@ elseif (HALFMOON_ENV == "production") {
 	HalfMoon\Config::set_exception_notification_subject("[garbagefm]");
 }
 
-define(ADMIN_ROOT, "/adm1n/");
+define(ADMIN_ROOT, "https://garbage.superblock.net/");
 
 require_once("lib/parsedown/Parsedown.php");
 require_once("lib/PasswordHash.php");
+
+require_once("lib/hash_equals/lib/hash_equals.php");
+require_once("lib/base32/src/Base32.php");
+require_once("lib/otphp/lib/Factory.php");
+require_once("lib/otphp/lib/OTPInterface.php");
+require_once("lib/otphp/lib/OTP.php");
+require_once("lib/otphp/lib/TOTPInterface.php");
+require_once("lib/otphp/lib/TOTP.php");
 
 ?>

@@ -4,7 +4,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<title><?= h($C->settings()->name) ?><?= $C->page_title ? ": " .
 			h($C->page_title) : "" ?></title>
-		<link rel="shortcut icon" href="/garbage.png" />
+		<link rel="shortcut icon" href="/favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="canonical" href="<?= h($C->canonical) ?>"/>
 		<link rel="alternate" type="application/rss+xml" title="RSS Feed"
@@ -106,9 +106,13 @@
 			<p>
 			<?= h($C->settings()->description) ?><br>
 			by
-			<a href="https://twitter.com/knowmercymod">Brandon Mercer</a>
-			and
-			<a href="https://jcs.org/">joshua stein</a>
+			<? $h_lines = array(); ?>
+			<? foreach ($C->hosts() as $host) { ?>
+				<? array_push($h_lines, "<a href=\""
+					. h($host->preferred_url) . "\">"
+					. h($host->full_name) . "</a>"); ?>
+			<? } ?>
+			<?= $helper->comma_join($h_lines); ?>
 			</p>
 
 			<p>
@@ -118,7 +122,8 @@
 			|
 			<a href="<?= h($C->settings()->itunes_url) ?>">iTunes</a>
 			|
-			<a href="https://twitter.com/garbagefm">Twitter</a>
+			<a href="https://twitter.com/<?=
+				h($C->settings()->twitter_username) ?>">Twitter</a>
 			|
 			<a href="mailto:<?= h($C->settings()->contact_email) ?>">E-mail</a>
 			</p>

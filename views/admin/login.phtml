@@ -1,19 +1,22 @@
-<fieldset class="box">
-	<legend>Login</legend>
+<div class="box">
+	<div class="legend">Login</div>
 
-	<? $form->form_tag(array("action" => "auth"), array(), function($f)
+	<? $form->form_tag(ADMIN_ROOT . "auth", array(), function($f)
 	use ($html) { ?>
 		<?= $html->flash_errors(); ?>
         <?= $html->flash_notices(); ?>
 
 		<?= $f->label_tag("username", "Username"); ?>
-		<?= $f->text_field_tag("username", "", array("size" => 20)); ?>
+		<?= $f->text_field_tag("username", "", array("size" => 20,
+			"autofocus" => "autofocus")); ?>
 		<br />
 
 		<?= $f->label_tag("password", "Password:"); ?>
 		<?= $f->password_field_tag("password", "", array("size" => 20)); ?>
 		<br />
 
+		<p>
 		<?= $f->submit_tag("Login"); ?>
+		</p>
 	<? }); ?>
-</fieldset>
+</div>

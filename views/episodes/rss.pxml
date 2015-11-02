@@ -12,7 +12,7 @@
 	<atom:link href="<?= h($C->settings()->url) ?>episodes.rss" rel="self" type="application/rss+xml"/>
 	<lastBuildDate><?= date("r"); ?></lastBuildDate>
 	<language>en-US</language>
-	<itunes:author><?= h($C->settings()->hosts) ?></itunes:author>
+	<itunes:author><?= $helper->joined_host_names($C) ?></itunes:author>
 	<itunes:subtitle><?= h($C->settings()->description) ?></itunes:subtitle>
 	<itunes:summary><?= h($C->settings()->description) ?></itunes:summary>
 	<description><?= h($C->settings()->description) ?></description>
@@ -38,8 +38,8 @@
 				and at <a href="http://garbage.fm/">http://garbage.fm</a>
 				</p>
 			]]></description>
-			<dc:creator><?= h($C->settings()->hosts) ?></dc:creator>
-			<itunes:author><?= h($C->settings()->hosts) ?></itunes:author>
+			<dc:creator><?= $helper->joined_host_names($C) ?></dc:creator>
+			<itunes:author><?= $helper->joined_host_names($C) ?></itunes:author>
 			<itunes:summary><?= h($episode->summary) ?></itunes:summary>
 			<itunes:explicit><?= $episode->is_explicit ? "yes" : "no" ?></itunes:explicit>
 			<itunes:duration><?= h($episode->duration_secs) ?></itunes:duration>

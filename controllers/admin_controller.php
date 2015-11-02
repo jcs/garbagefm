@@ -4,7 +4,8 @@ class AdminController extends ApplicationController {
 	static $session = "on";
 	static $before_filter = array(
 		"authenticate_user",
-		"require_logged_in_user" => array("except" => array("login", "auth")),
+		"require_logged_in_user" => array("except" => array("login", "auth",
+			"auth2")),
 	);
 
 	static $verify = array(
@@ -15,14 +16,17 @@ class AdminController extends ApplicationController {
 		),
 	);
 
-	static $filter_parameter_logging = array("password");
+	static $filter_parameter_logging = array("password", "totp_secret",
+		"totp_code");
 
 	public function auth() {
 		if ($user = User::find_by_username($this->params["username"])) {
-			if ($user->password_matches($this->params["password"])) {
-				$_SESSION["user_id"] = $user->id;
-				HalfMoon\Log::info("logged in as " . $user->username);
-				return $this->redirect_to(ADMIN_ROOT);
+			if ($user->hashed_password == "" ||
+			$user->password_matches($this->params["password"])) {
+				$_SESSION["auth_user_id"] = $user->id;
+				HalfMoon\Log::info("authenticated as " . $user->username);
+				return $this->render(array("action" => "auth2"),
+					array("auth_user" => $user));
 			}
 
 			HalfMoon\Log::error("logged failed for " . $user->username);
@@ -30,6 +34,27 @@ class AdminController extends ApplicationController {
 
 		$this->add_flash_error("Invalid username and/or password.");
 		return $this->render(array("action" => "login"));
+	}
+
+	public function auth2() {
+		if (!$_SESSION["auth_user_id"])
+			return $this->redirect_to(ADMIN_ROOT . "login");
+
+		$user = User::find($_SESSION["auth_user_id"]);
+		if (empty($user->totp_secret) ||
+		$user->totp->verify($this->params["totp_code"])) {
+			if (empty($user->totp_secret)) {
+				$user->totp_secret = $this->params["totp_secret"];
+				$user->save();
+			}
+
+			$_SESSION["user_id"] = $_SESSION["auth_user_id"];
+			unset($_SESSION["auth_user_id"]);
+			return $this->redirect_to(ADMIN_ROOT);
+		}
+
+		$this->add_flash_error("Invalid TOTP code");
+		$this->render(array("action" => "auth2"), array("auth_user" => $user));
 	}
 
 	public function flushcache() {
@@ -55,6 +80,9 @@ class AdminController extends ApplicationController {
 	}
 
 	public function index() {
+		if ($this->user->hashed_password == "")
+			return $this->redirect_to(ADMIN_ROOT . "/profile");
+
 		$this->episodes = Episode::find("all");
 	}
 

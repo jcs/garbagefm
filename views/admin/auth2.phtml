@@ -1,0 +1,45 @@
+<div class="box wide">
+	<div class="legend">Login - Step 2</div>
+
+	<? $form->form_tag(ADMIN_ROOT . "auth2", array(), function($f)
+	use ($html, $auth_user) { ?>
+		<?= $html->flash_errors(); ?>
+        <?= $html->flash_notices(); ?>
+
+		<?= $f->label_tag("username", "Username:",
+			array("class" => "required")); ?>
+		<span class="d">
+			<?= h($auth_user->username) ?>
+		</span>
+		<br />
+
+		<? if ($auth_user->totp_secret) { ?>
+			<?= $f->label_tag("totp_code", "TOTP Code:",
+				array("class" => "required")); ?>
+			<?= $f->text_field_tag("totp_code", "",
+				array("autofocus" => "autofocus")) ?>
+			<br />
+
+			<p>
+			<?= $f->submit_tag("Login"); ?>
+			</p>
+		<? } else { ?>
+			<? $totp = $auth_user->new_totp; ?>
+
+			<label class="required">TOTP Provisioning:</label>
+			<div class="d">
+				Scan the following QR code in a TOTP-compatible application such as
+				Google Authenticator:
+
+				<p>
+				<img src="https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=<?=
+					urlencode($totp->getProvisioningUri()) ?>&chld=H|0">
+				</p>
+			</div>
+
+			<?= $f->hidden_field_tag("totp_secret", $auth_user->totp_secret); ?>
+
+			<?= $f->submit_tag("Proceed"); ?>
+		<? } ?>
+	<? }); ?>
+</div>

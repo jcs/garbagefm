@@ -1,0 +1,52 @@
+<div style="float: right;">
+	<strong><a href="<?= ADMIN_ROOT ?>">Cancel</a></strong>
+</div>
+
+<h3>Edit Profile</h3>
+
+<?= $html->error_messages_for($C->user, "profile"); ?>
+
+<div class="box wide">
+	<? $form->form_for($C->user, ADMIN_ROOT . "profile/update",
+	array(), function($f) use ($C) { ?>
+		<div class="boxline">
+		<?= $f->label("username", "Username:", array("class" => "required")); ?>
+		<?= $f->text_field("username") ?>
+		</div>
+
+		<div class="boxline">
+		<?= $f->label("full_name", "Full name:", array("class" => "required")); ?>
+		<?= $f->text_field("full_name") ?>
+		</div>
+
+		<div class="boxline">
+		<?= $f->label("twitter_username", "Twitter username:",
+			array("class" => "required")); ?>
+		@ <?= $f->text_field("twitter_username") ?>
+		</div>
+
+		<div class="boxline">
+		<?= $f->label("url", "Other URL:", array("class" => "required")); ?>
+		<?= $f->text_field("url") ?>
+		</div>
+
+		<br>
+
+		<div class="boxline">
+		<?= $f->label("new_password", "New Password:",
+			array("class" => "required")); ?>
+		<?= $f->password_field("new_password") ?>
+		<span class="hint">Only if you want to change it</span>
+		</div>
+
+		<div class="boxline">
+		<?= $f->label("new_password_confirmation", "(confirm)",
+			array("class" => "required")); ?>
+		<?= $f->password_field("new_password_confirmation") ?>
+		</div>
+
+		<p>
+		<?= $f->submit_tag("Update"); ?>
+		</p>
+	<? }); ?>
+</div>

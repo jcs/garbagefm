@@ -1,0 +1,9 @@
+[submodule "lib/base32"]
+	path = lib/base32
+	url = git@github.com:ChristianRiesen/base32.git
+[submodule "lib/hash_equals"]
+	path = lib/hash_equals
+	url = git@github.com:znk3r/hash_equals.git
+[submodule "lib/otphp"]
+	path = lib/otphp
+	url = git@github.com:Spomky-Labs/otphp.git

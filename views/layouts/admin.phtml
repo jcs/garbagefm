@@ -17,8 +17,10 @@
 					Logged in as
 					<?= h($C->user->username); ?>
 					<br>
+					<a href="<?= ADMIN_ROOT ?>profile/">Edit Profile</a>
+					|
 					<?= $html->link_to("Logout",
-						array("controller" => "admin", "action" => "logout"),
+						ADMIN_ROOT . "logout",
 						array("confirm" => "Are you sure you want to logout?",
 							"method" => "post")); ?>
 				<? } else { ?>
@@ -32,12 +34,18 @@
 			<div class="clear"></div>
 		</div>
 		<div id="subheader">
-			<div style="float: right;">
-				<a href="<?= ADMIN_ROOT ?>show_settings">Edit Show Settings</a>
-			</div>
-			<a href="/">View public site</a>
-			|
-			<a href="<?= ADMIN_ROOT ?>flushcache">Purge Homepage/RSS Caches</a>
+			<? if ($C->user) { ?>
+				<div style="float: right;">
+					<a href="<?= ADMIN_ROOT ?>show_settings">Edit Show
+					Settings</a>
+				</div>
+				<a href="<?= $C->settings()->url ?>">View public site</a>
+				|
+				<a href="<?= ADMIN_ROOT ?>flushcache">Purge Homepage/RSS
+					Caches</a>
+			<? } else { ?>
+				&nbsp;
+			<? } ?>
 		</div>
 
 		<div id="inside">
@@ -49,7 +57,7 @@
 		</div>
 
 		<div id="footer">
-			Copyright &copy; 2015, joshua stein
+			Copyright &copy; 2015 joshua stein
 		</div>
 	</div>
 </body>
