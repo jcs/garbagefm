@@ -7,7 +7,8 @@
 
 /* session settings, change according to your application requirements */
 session_name("_garbagefm_session");
-session_set_cookie_params($lifetime = 0, $path = "/");
+session_set_cookie_params($lifetime = (60 * 60 * 24 * 7), "/",
+	"garbage.superblock.net", true, true);
 
 /* activate encrypted cookie storage; requires the mcrypt php extension */
 HalfMoon\Config::set_session_store(

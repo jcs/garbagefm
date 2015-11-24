@@ -10,7 +10,7 @@
 				array("class" => "required")); ?>
 			<?= $f->text_area_tag("upcoming_notes", $C->user->upcoming_notes,
 				array("class" => "variable",
-				"style" => "width: 75%; height: 10em; font-size: 8pt;")); ?>
+				"style" => "width: 75%; height: 10em; font-size: 9pt;")); ?>
 			<br>
 			<?= $f->submit_tag("Save"); ?>
 		</div>
@@ -33,6 +33,14 @@
 	<? } ?>
 </div>
 
+<p>
+<h3>Show Prompts</h3>
+</p>
+
+<div class="box">
+<?= nl2br(h(Settings::fetch()->prompts)); ?>
+</div>
+
 <h3>Past Episodes (<a href="<?= ADMIN_ROOT ?>episodes/build">Create New</a>)</h3>
 
 <ul>
@@ -46,3 +54,9 @@
 <? } ?>
 </ul>
 
+
+<h3>Episode Download Statistics</h3>
+
+<iframe style="margin-left: 1em; margin-right: 3em; width: 95%; height: 200px;
+	border: 0; overflow: hidden;"
+	src="https://countinual.com/jcs/counters/garbage.downloads?embed=1"></iframe>

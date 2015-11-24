@@ -52,6 +52,24 @@
 		<?= $f->text_field("itunes_url", array("style" => "width: 400px;")) ?>
 		</div>
 
+		<div class="boxline">
+		<?= $f->label("pocketcasts_url", "Pocket Casts URL:",
+			array("class" => "required")); ?>
+		<?= $f->text_field("pocketcasts_url", array("style" => "width: 400px;")) ?>
+		</div>
+
+		<div class="boxline">
+		<?= $f->label("overcast_url", "Overcast URL:",
+			array("class" => "required")); ?>
+		<?= $f->text_field("overcast_url", array("style" => "width: 400px;")) ?>
+		</div>
+
+		<div class="boxline">
+		<?= $f->label("prompts", "Prompts:", array("class" => "required")); ?>
+		<?= $f->text_area("prompts", array("class" => "variable",
+			"style" => "height: 7em;")) ?>
+		</div>
+
 		<p>
 		<?= $f->submit_tag("Update"); ?>
 		</p>

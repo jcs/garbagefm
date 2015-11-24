@@ -83,7 +83,8 @@ class AdminController extends ApplicationController {
 		if ($this->user->hashed_password == "")
 			return $this->redirect_to(ADMIN_ROOT . "/profile");
 
-		$this->episodes = Episode::find("all");
+		$this->episodes = Episode::find("all",
+			array("order" => "episode DESC"));
 	}
 
 	public function login() {

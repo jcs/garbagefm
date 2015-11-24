@@ -74,7 +74,7 @@ HalfMoon\Router::addRoute(array(
 
 HalfMoon\Router::addRootRoute(array(
 	"controller" => "episodes",
-	"action" => "index",
+	"action" => "home",
 ));
 
 ?>

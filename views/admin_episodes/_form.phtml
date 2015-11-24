@@ -34,8 +34,7 @@ feeds)
 
 <div class="boxline">
 <?= $f->label("duration_secs", "Duration:", array("class" => "required")); ?>
-<?= $f->text_field("duration_secs", array("style" => "width: 5em;")) ?>
-	seconds
+<?= $f->text_field("duration_secs", array("style" => "width: 5em;")) ?> seconds
 </div>
 
 <? if ($f->form_object->id) { ?>
@@ -58,10 +57,9 @@ feeds)
 </div>
 <div class="boxline">
 <?= $f->text_area("notes", array("class" => "fixed",
-	"style" => "width: 375px; height: 275px; font-size: 7pt;")); ?>
-<div id="markdown_preview" style="background-color: #fafafa; width: 375px;
-	height: 275px; border: 1px solid gray; display: inline-block;
-	margin-left: 10px; padding: 4px; overflow: auto;"></div>
+	"style" => "width: 400px; height: 350px; font-size: 9pt;")); ?>
+<div id="previews" style="display: inline-block; width: 400px; height: 350px;
+margin-left: 10px;">
 </div>
 
 <script>
@@ -72,7 +70,7 @@ function update_preview() {
 	else
 		update_running = true;
 
-	new Ajax.Updater("markdown_preview", "<?= ADMIN_ROOT ?>episodes/md_preview", {
+	new Ajax.Updater("previews", "<?= ADMIN_ROOT ?>episodes/md_preview", {
 		method: "post",
 		parameters: {
 			"preview_text": $("episode_notes").value,
@@ -82,8 +80,9 @@ function update_preview() {
 	});
 }
 
-new Form.Element.Observer("episode_notes", 0.5,
-	function(el, value) { update_preview(); });
+new Form.Element.Observer("episode_notes", 0.5, function(el, value) {
+	update_preview();
+});
 
 update_preview();
 

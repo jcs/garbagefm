@@ -32,8 +32,9 @@
 				Google Authenticator:
 
 				<p>
-				<img src="https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=<?=
-					urlencode($totp->getProvisioningUri()) ?>&chld=H|0">
+				<a href="<?= h($totp->getProvisioningUri()) ?>"><img
+					src="https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=<?=
+					urlencode($totp->getProvisioningUri()) ?>&chld=H|0"></a>
 				</p>
 			</div>
 

@@ -11,7 +11,7 @@ body, textarea.variable {
 }
 
 textarea.fixed {
-	font-family: dejavu sans mono, courier new, monospace;
+	font-family: monospace;
 	font-size: 8pt;
 }
 
@@ -191,7 +191,7 @@ div.s {
 }
 
 div#wrapper {
-	width: 900px;
+	width: 950px;
 	margin-left: auto;
 	margin-right: auto;
 	padding-bottom: 1em;
@@ -433,8 +433,7 @@ fieldset.box .boxtitle {
 }
 .box label,
 .box span,
-.box select,
-.box br {
+.box select {
 	line-height: 2em;
 }
 .box br {

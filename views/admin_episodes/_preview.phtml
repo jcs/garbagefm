@@ -1,0 +1,13 @@
+<div id="markdown_preview" style="background-color: #fafafa;
+	height: 200px; border: 1px solid gray; padding: 4px; overflow: auto;">
+<?= $C->episode->notes_html; ?>
+</div>
+<p>
+Chapters: (mark at end of show note line with <tt>&lt;-- ##:## --&gt;</tt>)
+</p>
+<div id="chapters_preview" style="background-color: #fafafa;
+	height: 100px; border: 1px solid gray; padding: 4px; overflow: auto;">
+<? foreach ($C->episode->chapters as $time => $title) { ?>
+	<li><strong><?= $time ?></strong> - <?= $title ?>
+<? } ?>
+</div>

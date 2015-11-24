@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<title><?= h($C->settings()->name) ?><?= $C->page_title ? ": " .
+		<title><?= h($C->settings()->name) ?> Podcast<?= $C->page_title ? ": " .
 			h($C->page_title) : "" ?></title>
 		<link rel="shortcut icon" href="/favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -11,28 +11,37 @@
 			href="<?= $C->settings()->url ?>episodes.rss"/>
 		<style>
 			body {
-				font-family: Ubuntu Mono Regular, inconsolata,
-					American Typewriter, courier new, monospace;
-				font-size: 10pt;
 				color: #333;
 				background-color: #fcfcfc;
 			}
 
+			body, code {
+				font-family: Ubuntu Mono Regular, inconsolata,
+					American Typewriter, courier new, monospace;
+				font-size: 10pt;
+			}
+			code {
+				background-color: #f0f0f0;
+			}
+
 			a {
-				color: #1888ad;
+				color: #1d71cc;
 				display: inline-block;
 			}
 			a:visited {
-				color: #6f96a3;
+				color: #6d95bf;
 			}
 
 			.lead {
-				margin-top: 5em;
+				margin-top: 3em;
 				text-align: center;
 			}
 
 			.lead .show_title {
 				font-size: 14pt;
+			}
+
+			.lead .logo {
 				margin-bottom: 1em;
 			}
 
@@ -42,18 +51,26 @@
 				color: #333;
 			}
 
-			.episodes {
-				margin: 3em auto 5em auto;
-				width: 600px;
+			p.subscribes {
+				font-size: 11pt;
 			}
 
-			.episodes hr {
+			p.subscribes a {
+				font-weight: bold;
+			}
+
+			hr {
 				border: 0;
 				height: 1px;
 				border-top: 1px solid lightgray;
 				margin-top: 3em;
 				margin-bottom: 3em;
-				width: 50%;
+				width: 600px;
+			}
+
+			.episodes {
+				margin: 3em auto 5em auto;
+				width: 600px;
 			}
 
 			.episode .date {
@@ -80,6 +97,11 @@
 				font-size: 8pt;
 			}
 
+			.episode .chapter {
+				font-style: italic;
+				text-decoration: none;
+			}
+
 			@media only screen and (max-width: 480px) {
 				.episodes {
 					width: 99%;
@@ -91,16 +113,29 @@
 				}
 			}
 		</style>
+		<script>
+			function episode_jump(obj, secs) {
+				var p = document.getElementById(obj);
+				if (!p) {
+					console.log("can't find object " + obj);
+					return;
+				}
+
+				p.play();
+				p.currentTime = secs;
+			}
+		</script>
 	</head>
 	<body>
 		<div class="lead">
-			<div class="show_title">
-				<a href="/"><?= h($C->settings()->name) ?></a>
-			</div>
-
 			<div class="logo">
 				<a href="/"><img src="/garbage-128.png"
-					srcset="/garbage-256.png 256w" width=128 height=128></a>
+					srcset="/garbage-128.png 1x, /garbage-256.png 2x"
+					width=128 height=128></a>
+			</div>
+
+			<div class="show_title">
+				<a href="/"><?= h($C->settings()->name) ?></a>
 			</div>
 
 			<p>
@@ -116,17 +151,26 @@
 			</p>
 
 			<p>
-			<a href="/episodes">Episodes</a>
-			|
-			<a href="/episodes.rss">RSS</a>
-			|
-			<a href="<?= h($C->settings()->itunes_url) ?>">iTunes</a>
-			|
 			<a href="https://twitter.com/<?=
 				h($C->settings()->twitter_username) ?>">Twitter</a>
 			|
 			<a href="mailto:<?= h($C->settings()->contact_email) ?>">E-mail</a>
+			|
+			<a href="/episodes">View All Episodes</a><br>
 			</p>
+
+			<p class="subscribes">
+			Subscribe:
+			<a href="/episodes.rss">RSS</a>
+			|
+			<a href="<?= h($C->settings()->itunes_url) ?>">iTunes</a>
+			|
+			<a href="<?= h($C->settings()->pocketcasts_url) ?>">Pocket Casts</a>
+			|
+			<a href="<?= h($C->settings()->overcast_url) ?>">Overcast</a>
+			</p>
+
+			<hr>
 		</div>
 
 		<?php echo $content_for_layout; ?>

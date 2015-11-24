@@ -7,7 +7,6 @@ class Episode extends ActiveRecord\Model {
 		array("notes"),
 		array("duration_secs"),
 		array("air_date"),
-		array("filesize"),
 	);
 	static $validates_uniqueness_of = array(
 		array("episode"),
@@ -44,6 +43,18 @@ class Episode extends ActiveRecord\Model {
 	public function get_notes_html() {
 		$parsedown = new Parsedown();
 		return $parsedown->text($this->notes);
+	}
+
+	public function get_chapters() {
+		$chapters = array();
+
+		$lines = explode("\n", $this->notes_html);
+		foreach ($lines as $line) {
+			if (preg_match("/^(<p>)?(.+?) <!-- ([0-9:]+) -->/", $line, $m))
+				$chapters[$m[3]] = strip_tags($m[2]);
+		}
+
+		return $chapters;
 	}
 
 	public function take_new_mp3($file) {

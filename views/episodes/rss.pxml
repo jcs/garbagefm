@@ -5,6 +5,7 @@
 	xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
 	xmlns:dc="http://purl.org/dc/elements/1.1/"
 	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:psc="http://podlove.org/simple-chapters"
 	version="2.0">
 <channel>
 	<title><?= h($C->settings()->name) ?></title>
@@ -44,8 +45,14 @@
 			<itunes:explicit><?= $episode->is_explicit ? "yes" : "no" ?></itunes:explicit>
 			<itunes:duration><?= h($episode->duration_secs) ?></itunes:duration>
 			<itunes:image href="<?= h($episode->artwork_url) ?>"/>
-			<enclosure url="<?= h($episode->mp3_url) ?>"
-				length="<?= h($episode->filesize) ?>" type="audio/mpeg"/>
+			<enclosure type="audio/mpeg" url="<?= h($episode->mp3_url) ?>"
+				length="<?= h($episode->filesize) ?>" />
+
+			<psc:chapters version="1.2">
+				<? foreach ($episode->chapters as $time => $title) { ?>
+					<psc:chapter start="<?= $time ?>" title="<?= h($title) ?>" />
+				<? } ?>
+			</psc:chapters>
 		</item>
 	<? } ?>
 </channel>

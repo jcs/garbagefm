@@ -82,10 +82,10 @@ class AdminEpisodesController extends ApplicationController {
 	}
 
 	public function md_preview() {
-		$parsedown = new Parsedown();
-		$this->render(array("html" =>
-			$parsedown->text($this->params["preview_text"]),
-			"layout" => false));
+		$this->episode = new Episode();
+		$this->episode->notes = $this->params["preview_text"];
+
+		return $this->render(array("partial" => "preview", "layout" => false));
 	}
 }
 
