@@ -83,6 +83,8 @@ class AdminController extends ApplicationController {
 		if ($this->user->hashed_password == "")
 			return $this->redirect_to(ADMIN_ROOT . "/profile");
 
+		$this->find_other_users();
+
 		$this->episodes = Episode::find("all",
 			array("order" => "episode DESC"));
 	}
@@ -111,6 +113,12 @@ class AdminController extends ApplicationController {
 		return $this->redirect_to(ADMIN_ROOT);
 	}
 
+	public function other_notes() {
+		$this->find_other_users();
+
+		return $this->render(array("partial" => "notes", "layout" => false));
+	}
+
 	public function update_show_settings() {
 		$this->settings = $this->settings();
 		if ($this->settings->update_attributes($this->params["settings"])) {
@@ -119,6 +127,11 @@ class AdminController extends ApplicationController {
 		}
 		else
 			$this->render(array("action" => "show_settings"));
+	}
+
+	protected function find_other_users() {
+		$this->other_users = User::find("all",
+			array("conditions" => array("id <> ?", $this->user->id)));
 	}
 }
 

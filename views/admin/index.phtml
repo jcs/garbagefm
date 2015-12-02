@@ -1,4 +1,8 @@
 <p>
+<div style="float: right;">
+	<a href="#" onclick="toggle_notes_updating(); return false;"
+		id="notes_status">Start auto-refreshing other notes</a>
+</div>
 <h3>Upcoming Show Notes/Scratch</h3>
 </p>
 
@@ -16,22 +20,35 @@
 		</div>
 	<? }); ?>
 
-	<? foreach (
-	User::find("all", array("conditions" => array("id <> ?", $C->user->id))) as
-	$other_user) { ?>
-		<br>
-		<div class="boxline">
-			<label class="required"><?= h($other_user->username) ?>:</label>
-			<div class="d">
-			<? if ($other_user->upcoming_notes == "") { ?>
-				<span class="na">No notes entered.</span>
-			<? } else { ?>
-				<?= nl2br(h($other_user->upcoming_notes)) ?>
-			<? } ?>
-			</div>
-		</div>
-	<? } ?>
+	<div id="other_notes">
+		<?= $C->render(array("partial" => "notes")); ?>
+	</div>
 </div>
+
+<script>
+	var updater;
+	function toggle_notes_updating() {
+		if (updater) {
+			updater.stop();
+			updater = null;
+			$("notes_status").innerHTML =
+				$("notes_status").innerHTML.replace(/Stop/, "Start");
+		}
+		else {
+			updater = new Ajax.PeriodicalUpdater("other_notes",
+				"<?= ADMIN_ROOT ?>other_notes", {
+				method: "get",
+				frequency: 2,
+			});
+			$("notes_status").innerHTML =
+				$("notes_status").innerHTML.replace(/Start/, "Stop");
+		}
+	}
+
+	<? if (date("D") == "Thu" && date("G") >= 18 && date("G") <= 21) { ?>
+		toggle_notes_updating();
+	<? } ?>
+</script>
 
 <p>
 <h3>Show Prompts</h3>
