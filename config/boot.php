@@ -58,7 +58,8 @@ elseif (HALFMOON_ENV == "production") {
 	HalfMoon\Config::set_exception_notification_subject("[garbagefm]");
 }
 
-define(ADMIN_ROOT, "https://garbage.superblock.net/");
+define(ADMIN_ROOT_DOMAIN, "garbage.superblock.net");
+define(ADMIN_ROOT, "https://" . ADMIN_ROOT_DOMAIN . "/");
 
 require_once("lib/parsedown/Parsedown.php");
 require_once("lib/PasswordHash.php");

@@ -3,8 +3,14 @@
 class EpisodesController extends ApplicationController {
 	static $caches_page = array("home", "index", "show", "rss");
 
+	static $episodes_per_page = 5;
+
 	public function home() {
-		$this->find_episodes(6);
+		$page = 0;
+		if (array_key_exists("page", $this->params))
+			$page = intval($this->params["page"]);
+
+		$this->find_episodes($page);
 		$this->render(array("action" => "index"));
 	}
 
@@ -30,10 +36,28 @@ class EpisodesController extends ApplicationController {
 			. $this->episode->title;
 	}
 
-	protected function find_episodes($limit = 0) {
-		$this->episodes = Episode::find("all",
-			array("conditions" => "is_pending = 0",
-			"order" => "episode DESC", "limit" => $limit));
+	protected function find_episodes($page = -1) {
+		$count = Episode::count_by_is_pending(false);
+		$this->pages = ceil($count / static::$episodes_per_page) - 1;
+
+		$conds = array("conditions" => "is_pending = 0",
+			"order" => "episode DESC");
+
+		if ($page == -1) {
+			/* return all episodes */
+			/* TODO: should we still limit it to something? */
+		} else {
+			$this->page = intval($page);
+
+			if ($this->page < 0 || $this->page > $this->pages)
+				throw new \ActiveRecord\RecordNotFound("invalid page "
+					. $this->page);
+
+			$conds["limit"] = static::$episodes_per_page;
+			$conds["offset"] = (static::$episodes_per_page * $this->page);
+		}
+
+		$this->episodes = Episode::find("all", $conds);
 	}
 }
 

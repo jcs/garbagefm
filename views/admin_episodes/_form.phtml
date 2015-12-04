@@ -22,6 +22,18 @@ feeds)
 <?= $f->text_field("title", array("style" => "width: 300px;")); ?>
 </div>
 
+<? if ($f->form_object->title) { ?>
+	<div class="boxline">
+	<?= $f->label("tweet", "Tweet:", array("class" => "required")); ?>
+	<textarea>
+<?= strtolower(h($C->settings()->name)) ?>[<?=
+	h($f->form_object->episode) ?>]: <?= h($f->form_object->title) ?>
+
+<?= h($C->settings()->url) ?>episodes/<?= h($f->form_object->episode) ?>
+</textarea>
+	</div>
+<? } ?>
+
 <div class="boxline">
 <?= $f->label("summary", "Summary:", array("class" => "required")); ?>
 <?= $f->text_field("summary", array("style" => "width: 500px;")); ?>

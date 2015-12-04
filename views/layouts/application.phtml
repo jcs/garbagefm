@@ -6,7 +6,6 @@
 			h($C->page_title) : "" ?></title>
 		<link rel="shortcut icon" href="/favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="canonical" href="<?= h($C->canonical) ?>"/>
 		<link rel="alternate" type="application/rss+xml" title="RSS Feed"
 			href="<?= $C->settings()->url ?>episodes.rss"/>
 		<style>
@@ -30,6 +29,10 @@
 			}
 			a:visited {
 				color: #6d95bf;
+			}
+
+			.na {
+				color: gray;
 			}
 
 			.lead {
@@ -68,7 +71,7 @@
 				width: 600px;
 			}
 
-			.episodes {
+			.episodes, .episodes_pager {
 				margin: 3em auto 5em auto;
 				width: 600px;
 			}
@@ -102,8 +105,13 @@
 				text-decoration: none;
 			}
 
+
+			.episodes_pager {
+				text-align: center;
+			}
+
 			@media only screen and (max-width: 480px) {
-				.episodes {
+				.episodes, .episodes_pager {
 					width: 99%;
 				}
 

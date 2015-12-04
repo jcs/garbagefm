@@ -35,22 +35,22 @@
 HalfMoon\Router::addRoute(array(
 	"url" => "episodes/:action/:id",
 	"controller" => "admin_episodes",
-	"conditions" => array("hostname" => "garbage.superblock.net"),
+	"conditions" => array("hostname" => ADMIN_ROOT_DOMAIN),
 ));
 HalfMoon\Router::addRoute(array(
 	"url" => "profile/:action",
 	"controller" => "admin_profile",
-	"conditions" => array("hostname" => "garbage.superblock.net"),
+	"conditions" => array("hostname" => ADMIN_ROOT_DOMAIN),
 ));
 HalfMoon\Router::addRoute(array(
 	"url" => ":action/:id",
 	"controller" => "admin",
-	"conditions" => array("hostname" => "garbage.superblock.net"),
+	"conditions" => array("hostname" => ADMIN_ROOT_DOMAIN),
 ));
 HalfMoon\Router::addRootRoute(array(
 	"controller" => "admin",
 	"action" => "index",
-	"conditions" => array("hostname" => "garbage.superblock.net"),
+	"conditions" => array("hostname" => ADMIN_ROOT_DOMAIN),
 ));
 
 
@@ -65,6 +65,13 @@ HalfMoon\Router::addRoute(array(
 	"controller" => "episodes",
 	"action" => "show",
 	"conditions" => array("id" => '/^\d+$/'),
+));
+
+HalfMoon\Router::addRoute(array(
+	"url" => "page/:page",
+	"controller" => "episodes",
+	"action" => "home",
+	"conditions" => array("page" => '/^\d+$/'),
 ));
 
 HalfMoon\Router::addRoute(array(
