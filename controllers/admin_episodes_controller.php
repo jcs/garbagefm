@@ -34,10 +34,7 @@ class AdminEpisodesController extends ApplicationController {
 	public function build() {
 		$this->episode = new Episode;
 
-		$sth = Episode::query("SELECT MAX(episode) FROM episodes");
-		$row = $sth->fetch(PDO::FETCH_NUM);
-		$max = intval($row[0]);
-		$this->episode->episode = $max + 1;
+		$this->episode->episode = Episode::next_episode();
 
 		$this->episode->is_pending = true;
 		$this->episode->air_date = new DateTime(date("Y-m-d 20:00:00"));

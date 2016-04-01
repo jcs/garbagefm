@@ -19,6 +19,13 @@ class Episode extends ActiveRecord\Model {
 
 	static $after_destroy = array("delete_mp3_file");
 
+	static public function next_episode() {
+		$sth = Episode::query("SELECT MAX(episode) FROM episodes");
+		$row = $sth->fetch(PDO::FETCH_NUM);
+		$max = intval($row[0]);
+		return $max + 1;
+	}
+
 	public function get_file_path() {
 		return "episodes/garbage" . intval($this->episode) . ".mp3";
 	}
