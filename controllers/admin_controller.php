@@ -42,7 +42,8 @@ class AdminController extends ApplicationController {
 
 		$user = User::find($_SESSION["auth_user_id"]);
 		if (empty($user->totp_secret) ||
-		$user->totp->verify($this->params["totp_code"])) {
+		($this->params["totp_code"] &&
+		$user->totp->verify($this->params["totp_code"]))) {
 			if (empty($user->totp_secret)) {
 				$user->totp_secret = $this->params["totp_secret"];
 				$user->save();
