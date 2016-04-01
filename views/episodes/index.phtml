@@ -1,3 +1,7 @@
+<? if (isset($C->page) && $C->page > 0) { ?>
+	<?= $C->render(array("partial" => "pager")); ?>
+<? } ?>
+
 <div class="episodes">
 	<? foreach ($episodes as $x => $episode) { ?>
 		<?= $C->render(array("partial" => "episode"),
@@ -10,21 +14,6 @@
 </div>
 
 <? if (isset($C->page)) { ?>
-	<div class="episodes_pager">
-		<hr>
-
-		<? if ($C->page > 0) { ?>
-			<a href="/page/<?= h($C->page - 1) ?>">&lt;&lt;</a>
-		<? } else { ?>
-			<span class="na">&lt;&lt;</span>
-		<? } ?>
-
-		pages[<a href="/page/<?= h($C->page) ?>"><?= h($C->page) ?></a>]
-
-		<? if ($C->page < $C->pages) { ?>
-			<a href="/page/<?= h($C->page + 1) ?>">&gt;&gt;</a>
-		<? } else { ?>
-			<span class="na">&gt;&gt;</span>
-		<? } ?>
-	</div>
+	<hr>
+	<?= $C->render(array("partial" => "pager")); ?>
 <? } ?>

@@ -11,9 +11,8 @@
 		</div>
 	</div>
 
-	<audio controls id="episode_player_<?= $episode->episode ?>">
-		<source src="<?= h($episode->mp3_url) ?>" type="audio/mpeg"
-			preload="none">
+	<audio controls id="episode_player_<?= $episode->episode ?>" preload="none">
+		<source src="<?= h($episode->mp3_url) ?>" type="audio/mpeg">
 		Your browser does not support the audio element -
 	</audio>
 	<div class="download">

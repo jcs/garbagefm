@@ -5,7 +5,7 @@ class Episode extends ActiveRecord\Model {
 		array("episode"),
 		array("title"),
 		array("notes"),
-		array("duration_secs"),
+		array("duration"),
 		array("air_date"),
 	);
 	static $validates_uniqueness_of = array(
@@ -14,7 +14,7 @@ class Episode extends ActiveRecord\Model {
 
 	static $attr_accessible = array(
 		"episode", "is_pending", "air_date", "title", "is_explicit",
-		"duration_secs", "notes", "summary",
+		"duration", "notes", "summary", "custom_artwork_url",
 	);
 
 	static $after_destroy = array("delete_mp3_file");
@@ -44,12 +44,43 @@ class Episode extends ActiveRecord\Model {
 	}
 
 	public function get_artwork_url() {
-		return Settings::fetch()->logo_url;
+		if ($this->custom_artwork_url)
+			return $this->custom_artwork_url;
+		else
+			return Settings::fetch()->logo_url;
 	}
 
-	public function get_notes_html() {
+	public function set_notes($notes) {
+		$this->assign_attribute("notes", $notes);
+
 		$parsedown = new Parsedown();
-		return $parsedown->text($this->notes);
+		$this->notes_html = $parsedown->text($notes);
+	}
+
+	public function set_duration($duration) {
+		$secs = 0;
+
+		if (preg_match("/^(\d+):(\d+):(\d+)$/", $duration, $m))
+			$secs = intval($m[3]) + (intval($m[2]) * 60) +
+				(intval($m[1]) * 60 * 60);
+		elseif (preg_match("/^(\d+):(\d+)$/", $duration, $m))
+			$secs = intval($m[2]) + (intval($m[1]) * 60);
+		else
+			$secs = intval($duration);
+
+		$this->assign_attribute("duration_secs", $secs);
+
+		$hours = floor($secs / 3600);
+		$mins = floor(($secs - ($hours * 3600)) / 60);
+		$secs = floor($secs % 60);
+
+		$tms = "";
+		if ($hours > 0)
+			$tms = sprintf("%d:%02d:%02d", $hours, $mins, $secs);
+		else
+			$tms = sprintf("%d:%02d", $mins, $secs);
+
+		$this->assign_attribute("duration", $tms);
 	}
 
 	public function get_chapters() {

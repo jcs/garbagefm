@@ -15,9 +15,9 @@
 			}
 
 			body, code {
-				font-family: Ubuntu Mono Regular, inconsolata,
-					American Typewriter, courier new, monospace;
-				font-size: 10pt;
+				font-family: ubuntu mono, droid sans mono,
+					inconsolata, menlo, courier new, monospace;
+				font-size: 9pt;
 			}
 			code {
 				background-color: #f0f0f0;
@@ -55,24 +55,20 @@
 			}
 
 			p.subscribes {
-				font-size: 11pt;
-			}
-
-			p.subscribes a {
-				font-weight: bold;
+				font-size: 10pt;
 			}
 
 			hr {
 				border: 0;
 				height: 1px;
-				border-top: 1px solid lightgray;
-				margin-top: 3em;
-				margin-bottom: 3em;
+				border-top: 1px solid #ddd;
+				margin-top: 2em;
+				margin-bottom: 2em;
 				width: 600px;
 			}
 
 			.episodes, .episodes_pager {
-				margin: 3em auto 5em auto;
+				margin: 2em auto 4em auto;
 				width: 600px;
 			}
 
@@ -111,7 +107,15 @@
 			}
 
 			@media only screen and (max-width: 480px) {
+				body {
+					margin: 5px 15px;
+				}
+
 				.episodes, .episodes_pager {
+					width: 99%;
+				}
+
+				hr {
 					width: 99%;
 				}
 

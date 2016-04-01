@@ -34,9 +34,17 @@ feeds)
 	</div>
 <? } ?>
 
+<!--
 <div class="boxline">
 <?= $f->label("summary", "Summary:", array("class" => "required")); ?>
 <?= $f->text_field("summary", array("style" => "width: 500px;")); ?>
+</div>
+-->
+
+<div class="boxline">
+<?= $f->label("custom_artwork_url", "Custom Artwork URL:",
+	array("class" => "required")); ?>
+<?= $f->text_field("custom_artwork_url", array("style" => "width: 500px;")) ?>
 </div>
 
 <div class="boxline">
@@ -45,8 +53,9 @@ feeds)
 </div>
 
 <div class="boxline">
-<?= $f->label("duration_secs", "Duration:", array("class" => "required")); ?>
-<?= $f->text_field("duration_secs", array("style" => "width: 5em;")) ?> seconds
+<?= $f->label("duration", "Duration:", array("class" => "required")); ?>
+<?= $f->text_field("duration", array("style" => "width: 5em;")) ?>
+	<span class="na">((h:)?m?m:ss)</span>
 </div>
 
 <? if ($f->form_object->id) { ?>

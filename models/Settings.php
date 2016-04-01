@@ -10,6 +10,15 @@ class Settings extends ActiveRecord\Model {
 	static public function fetch() {
 		return Settings::find("first");
 	}
+
+	public function get_replaced_prompts() {
+		$prompts = $this->prompts;
+		$prompts = preg_replace("/##DATE##/", date("l, F jS, Y"), $prompts);
+		$prompts = preg_replace("/##NEXTEPISODE##/", Episode::next_episode(),
+			$prompts);
+
+		return $prompts;
+	}
 }
 
 ?>

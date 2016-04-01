@@ -37,13 +37,12 @@
 				We welcome your feedback at <a
 				href="https://twitter.com/garbagefm">@garbagefm</a> on Twitter
 				and at <a href="http://garbage.fm/">http://garbage.fm</a>
-				</p>
-			]]></description>
+				</p>]]></description>
 			<dc:creator><?= $helper->joined_host_names($C) ?></dc:creator>
 			<itunes:author><?= $helper->joined_host_names($C) ?></itunes:author>
 			<itunes:summary><?= h($episode->summary) ?></itunes:summary>
 			<itunes:explicit><?= $episode->is_explicit ? "yes" : "no" ?></itunes:explicit>
-			<itunes:duration><?= h($episode->duration_secs) ?></itunes:duration>
+			<itunes:duration><?= h($episode->duration) ?></itunes:duration>
 			<itunes:image href="<?= h($episode->artwork_url) ?>"/>
 			<enclosure type="audio/mpeg" url="<?= h($episode->mp3_url) ?>"
 				length="<?= h($episode->filesize) ?>" />
