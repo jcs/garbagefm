@@ -162,15 +162,6 @@
 			<?= $helper->comma_join($h_lines); ?>
 			</p>
 
-			<p>
-			<a href="https://twitter.com/<?=
-				h($C->settings()->twitter_username) ?>">Twitter</a>
-			|
-			<a href="mailto:<?= h($C->settings()->contact_email) ?>">E-mail</a>
-			|
-			<a href="/episodes">View All Episodes</a><br>
-			</p>
-
 			<p class="subscribes">
 			Subscribe:
 			<a href="/episodes.rss">RSS</a>
@@ -180,6 +171,14 @@
 			<a href="<?= h($C->settings()->pocketcasts_url) ?>">Pocket Casts</a>
 			|
 			<a href="<?= h($C->settings()->overcast_url) ?>">Overcast</a>
+			</p>
+
+			<p>
+			Feedback:
+			<a href="https://twitter.com/<?=
+				h($C->settings()->twitter_username) ?>">Twitter</a>
+			|
+			<a href="mailto:<?= h($C->settings()->contact_email) ?>">E-mail</a>
 			</p>
 
 			<hr>

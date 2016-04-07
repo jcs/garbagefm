@@ -1,7 +1,7 @@
 <div class="box">
 	<div class="legend">Login</div>
 
-	<? $form->form_tag(ADMIN_ROOT . "auth", array(), function($f)
+	<? $form->form_tag(ADMIN_ROOT_URL . "auth", array(), function($f)
 	use ($html) { ?>
 		<?= $html->flash_errors(); ?>
         <?= $html->flash_notices(); ?>

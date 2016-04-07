@@ -10,7 +10,7 @@ class AdminProfileController extends ApplicationController {
 	static $verify = array(
 		array("method" => "post",
 			"only" => array("update"),
-			"redirect_to" => ADMIN_ROOT,
+			"redirect_to" => ADMIN_ROOT_URL,
 		),
 	);
 
@@ -25,7 +25,7 @@ class AdminProfileController extends ApplicationController {
 	public function update() {
 		if ($this->user->update_attributes($this->params["user"])) {
 			$this->add_flash_success("Successfully updated profile.");
-			return $this->redirect_to(ADMIN_ROOT);
+			return $this->redirect_to(ADMIN_ROOT_URL);
 		}
 		else
 			$this->render(array("action" => "index"));

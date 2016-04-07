@@ -7,7 +7,7 @@
 </p>
 
 <div class="box">
-	<? $form->form_tag(ADMIN_ROOT . "update_notes", array(),
+	<? $form->form_tag(ADMIN_ROOT_URL . "update_notes", array(),
 	function($f) use ($C) { ?>
 		<div class="boxline">
 			<?= $f->label_tag("upcoming_notes", $C->user->username . ":",
@@ -36,7 +36,7 @@
 		}
 		else {
 			updater = new Ajax.PeriodicalUpdater("other_notes",
-				"<?= ADMIN_ROOT ?>other_notes", {
+				"<?= ADMIN_ROOT_URL ?>other_notes", {
 				method: "get",
 				frequency: 2,
 			});
@@ -58,11 +58,11 @@
 <?= nl2br(h(Settings::fetch()->replaced_prompts)); ?>
 </div>
 
-<h3>Past Episodes (<a href="<?= ADMIN_ROOT ?>episodes/build">Create New</a>)</h3>
+<h3>Past Episodes (<a href="<?= ADMIN_ROOT_URL ?>episodes/build">Create New</a>)</h3>
 
 <ul>
 <? foreach ($C->episodes as $episode) { ?>
-	<li><a href="<?= ADMIN_ROOT ?>episodes/edit/<?= $episode->episode ?>"><?=
+	<li><a href="<?= ADMIN_ROOT_URL ?>episodes/edit/<?= $episode->episode ?>"><?=
 		$episode->episode ?>: <?= h($episode->title) ?></a>
 		(<?= $episode->air_date->format("Y-m-d") ?>)
 		<? if ($episode->is_pending) { ?>

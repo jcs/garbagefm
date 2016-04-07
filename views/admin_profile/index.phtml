@@ -1,5 +1,5 @@
 <div style="float: right;">
-	<strong><a href="<?= ADMIN_ROOT ?>">Cancel</a></strong>
+	<strong><a href="<?= ADMIN_ROOT_URL ?>">Cancel</a></strong>
 </div>
 
 <h3>Edit Profile</h3>
@@ -7,7 +7,7 @@
 <?= $html->error_messages_for($C->user, "profile"); ?>
 
 <div class="box wide">
-	<? $form->form_for($C->user, ADMIN_ROOT . "profile/update",
+	<? $form->form_for($C->user, ADMIN_ROOT_URL . "profile/update",
 	array(), function($f) use ($C) { ?>
 		<div class="boxline">
 		<?= $f->label("username", "Username:", array("class" => "required")); ?>

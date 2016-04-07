@@ -5,10 +5,14 @@
 	should do per-environment setup like logging, tweaking php settings, etc.
 */
 
+define(ADMIN_ROOT_DOMAIN, "garbage.fm");
+define(ADMIN_ROOT_PATH, "/adm1n/");
+define(ADMIN_ROOT_URL, "https://" . ADMIN_ROOT_DOMAIN . ADMIN_ROOT_PATH);
+
 /* session settings, change according to your application requirements */
 session_name("_garbagefm_session");
 session_set_cookie_params($lifetime = (60 * 60 * 24 * 7), "/",
-	"garbage.superblock.net", true, true);
+	ADMIN_ROOT_DOMAIN, true, true);
 
 /* activate encrypted cookie storage; requires the mcrypt php extension */
 HalfMoon\Config::set_session_store(
@@ -57,9 +61,6 @@ elseif (HALFMOON_ENV == "production") {
 	HalfMoon\Config::set_exception_notification_recipient("jcs@jcs.org");
 	HalfMoon\Config::set_exception_notification_subject("[garbagefm]");
 }
-
-define(ADMIN_ROOT_DOMAIN, "garbage.superblock.net");
-define(ADMIN_ROOT, "https://" . ADMIN_ROOT_DOMAIN . "/");
 
 require_once("lib/parsedown/Parsedown.php");
 require_once("lib/PasswordHash.php");

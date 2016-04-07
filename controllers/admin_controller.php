@@ -12,7 +12,7 @@ class AdminController extends ApplicationController {
 		array("method" => "post",
 			"only" => array("auth", "logout", "update_notes",
 				"update_show_settings"),
-			"redirect_to" => ADMIN_ROOT,
+			"redirect_to" => ADMIN_ROOT_URL,
 		),
 	);
 
@@ -38,7 +38,7 @@ class AdminController extends ApplicationController {
 
 	public function auth2() {
 		if (!$_SESSION["auth_user_id"])
-			return $this->redirect_to(ADMIN_ROOT . "login");
+			return $this->redirect_to(ADMIN_ROOT_URL . "login");
 
 		$user = User::find($_SESSION["auth_user_id"]);
 		if (empty($user->totp_secret) ||
@@ -51,7 +51,7 @@ class AdminController extends ApplicationController {
 
 			$_SESSION["user_id"] = $_SESSION["auth_user_id"];
 			unset($_SESSION["auth_user_id"]);
-			return $this->redirect_to(ADMIN_ROOT);
+			return $this->redirect_to(ADMIN_ROOT_URL);
 		}
 
 		$this->add_flash_error("Invalid TOTP code");
@@ -60,7 +60,7 @@ class AdminController extends ApplicationController {
 
 	public function flushcache() {
 		if (\HalfMoon\Utils::is_blank(\HalfMoon\Config::instance()->cache_store_path))
-			return redirect_to(ADMIN_ROOT);
+			return redirect_to(ADMIN_ROOT_URL);
 
 		$deleted = 0;
 
@@ -77,12 +77,12 @@ class AdminController extends ApplicationController {
 		$this->add_flash_success("Deleted " . $deleted . " cached file"
 			. ($deleted == 1 ? "" : "s"));
 
-		return $this->redirect_to(ADMIN_ROOT);
+		return $this->redirect_to(ADMIN_ROOT_URL);
 	}
 
 	public function index() {
 		if ($this->user->hashed_password == "")
-			return $this->redirect_to(ADMIN_ROOT . "/profile");
+			return $this->redirect_to(ADMIN_ROOT_URL . "profile");
 
 		$this->find_other_users();
 
@@ -111,7 +111,7 @@ class AdminController extends ApplicationController {
 		$this->user->save();
 
 		$this->add_flash_success("Your upcoming show notes have been saved.");
-		return $this->redirect_to(ADMIN_ROOT);
+		return $this->redirect_to(ADMIN_ROOT_URL);
 	}
 
 	public function other_notes() {
@@ -124,7 +124,7 @@ class AdminController extends ApplicationController {
 		$this->settings = $this->settings();
 		if ($this->settings->update_attributes($this->params["settings"])) {
 			$this->add_flash_success("Show settings have been updated.");
-			return $this->redirect_to(ADMIN_ROOT);
+			return $this->redirect_to(ADMIN_ROOT_URL);
 		}
 		else
 			$this->render(array("action" => "show_settings"));

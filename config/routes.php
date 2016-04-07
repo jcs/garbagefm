@@ -33,23 +33,23 @@
 
 /* admin */
 HalfMoon\Router::addRoute(array(
-	"url" => "episodes/:action/:id",
+	"url" => ADMIN_ROOT_PATH . "episodes/:action/:id",
 	"controller" => "admin_episodes",
 	"conditions" => array("hostname" => ADMIN_ROOT_DOMAIN),
 ));
 HalfMoon\Router::addRoute(array(
-	"url" => "profile/:action",
+	"url" => ADMIN_ROOT_PATH . "profile/:action",
 	"controller" => "admin_profile",
 	"conditions" => array("hostname" => ADMIN_ROOT_DOMAIN),
 ));
 HalfMoon\Router::addRoute(array(
-	"url" => ":action/:id",
+	"url" => ADMIN_ROOT_PATH . ":action/:id",
 	"controller" => "admin",
 	"conditions" => array("hostname" => ADMIN_ROOT_DOMAIN),
 ));
-HalfMoon\Router::addRootRoute(array(
+HalfMoon\Router::addRoute(array(
+	"url" => ADMIN_ROOT_PATH,
 	"controller" => "admin",
-	"action" => "index",
 	"conditions" => array("hostname" => ADMIN_ROOT_DOMAIN),
 ));
 

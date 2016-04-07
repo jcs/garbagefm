@@ -2,7 +2,8 @@
 	<br>
 	<div class="boxline">
 		<label class="required"><?= h($other_user->username) ?>:</label>
-		<div class="d" id="notes_user_<?= h($other_user->username) ?>">
+		<div class="d" id="notes_user_<?= h($other_user->username) ?>"
+			style="line-height: 1.4em;">
 		<? if ($other_user->upcoming_notes == "") { ?>
 			<span class="na">No notes entered.</span>
 		<? } else { ?>

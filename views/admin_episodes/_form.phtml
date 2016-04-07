@@ -91,7 +91,7 @@ function update_preview() {
 	else
 		update_running = true;
 
-	new Ajax.Updater("previews", "<?= ADMIN_ROOT ?>episodes/md_preview", {
+	new Ajax.Updater("previews", "<?= ADMIN_ROOT_URL ?>episodes/md_preview", {
 		method: "post",
 		parameters: {
 			"preview_text": $("episode_notes").value,

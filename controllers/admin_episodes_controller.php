@@ -11,7 +11,7 @@ class AdminEpisodesController extends ApplicationController {
 	static $verify = array(
 		array("method" => "post",
 			"only" => array("create", "update", "destroy"),
-			"redirect_to" => ADMIN_ROOT,
+			"redirect_to" => ADMIN_ROOT_URL,
 		),
 	);
 
@@ -23,7 +23,7 @@ class AdminEpisodesController extends ApplicationController {
 
 		$this->add_flash_success("Successfully deleted episode "
 			. h($this->episode->episode));
-		return $this->redirect_to(ADMIN_ROOT);
+		return $this->redirect_to(ADMIN_ROOT_URL);
 	}
 
 	public function index() {
@@ -51,7 +51,7 @@ class AdminEpisodesController extends ApplicationController {
 		if ($this->episode->save()) {
 			$this->add_flash_success("Successfully created episode " .
 				$this->episode->episode);
-			return $this->redirect_to(ADMIN_ROOT);
+			return $this->redirect_to(ADMIN_ROOT_URL);
 		}
 		else {
 			return $this->render(array("action" => "build"));
@@ -71,7 +71,7 @@ class AdminEpisodesController extends ApplicationController {
 		if ($this->episode->update_attributes($this->params["episode"])) {
 			$this->add_flash_success("Successfully updated episode " .
 				h($this->episode->episode));
-			return $this->redirect_to(ADMIN_ROOT);
+			return $this->redirect_to(ADMIN_ROOT_URL);
 		}
 		else {
 			return $this->render(array("action" => "edit"));

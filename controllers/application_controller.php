@@ -19,7 +19,7 @@ class ApplicationController extends HalfMoon\ApplicationController {
 		if ($this->user)
 			return true;
 
-		return $this->redirect_to(ADMIN_ROOT . "login");
+		return $this->redirect_to(ADMIN_ROOT_URL . "login");
 	}
 
 	protected function settings() {

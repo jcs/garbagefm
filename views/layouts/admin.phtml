@@ -17,18 +17,18 @@
 					Logged in as
 					<?= h($C->user->username); ?>
 					<br>
-					<a href="<?= ADMIN_ROOT ?>profile/">Edit Profile</a>
+					<a href="<?= ADMIN_ROOT_URL ?>profile/">Edit Profile</a>
 					|
 					<?= $html->link_to("Logout",
-						ADMIN_ROOT . "logout",
+						ADMIN_ROOT_URL . "logout",
 						array("confirm" => "Are you sure you want to logout?",
 							"method" => "post")); ?>
 				<? } else { ?>
-					<?= $html->link_to("Login", ADMIN_ROOT . "login"); ?>
+					<?= $html->link_to("Login", ADMIN_ROOT_URL . "login"); ?>
 				<? } ?>
 			</div>
 
-			<h2><a href="<?= ADMIN_ROOT ?>"><?= h($C->settings()->name) ?>
+			<h2><a href="<?= ADMIN_ROOT_URL ?>"><?= h($C->settings()->name) ?>
 				- Administration</a></h2>
 
 			<div class="clear"></div>
@@ -36,12 +36,12 @@
 		<div id="subheader">
 			<? if ($C->user) { ?>
 				<div style="float: right;">
-					<a href="<?= ADMIN_ROOT ?>show_settings">Edit Show
+					<a href="<?= ADMIN_ROOT_URL ?>show_settings">Edit Show
 					Settings</a>
 				</div>
 				<a href="<?= $C->settings()->url ?>">View public site</a>
 				|
-				<a href="<?= ADMIN_ROOT ?>flushcache">Purge Homepage/RSS
+				<a href="<?= ADMIN_ROOT_URL ?>flushcache">Purge Homepage/RSS
 					Caches</a>
 			<? } else { ?>
 				&nbsp;
@@ -57,7 +57,7 @@
 		</div>
 
 		<div id="footer">
-			Copyright &copy; 2015 joshua stein
+			Copyright &copy; 2015-<?= date("Y") ?> joshua stein
 		</div>
 	</div>
 </body>

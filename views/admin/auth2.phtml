@@ -1,7 +1,7 @@
 <div class="box wide">
 	<div class="legend">Login - Step 2</div>
 
-	<? $form->form_tag(ADMIN_ROOT . "auth2", array(), function($f)
+	<? $form->form_tag(ADMIN_ROOT_URL . "auth2", array(), function($f)
 	use ($html, $auth_user) { ?>
 		<?= $html->flash_errors(); ?>
         <?= $html->flash_notices(); ?>

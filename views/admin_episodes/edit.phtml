@@ -1,18 +1,18 @@
 <div style="float: right;">
 	<strong>
 	<?= $html->link_to("Delete",
-		ADMIN_ROOT . "episodes/destroy/" . $episode->episode,
+		ADMIN_ROOT_URL . "episodes/destroy/" . $episode->episode,
 		array("confirm" => "Are you sure you want to delete this episode?",
 			"method" => "post")); ?>
 	</strong>
 	|
-	<strong><a href="<?= ADMIN_ROOT ?>">Cancel</a></strong>
+	<strong><a href="<?= ADMIN_ROOT_URL ?>">Cancel</a></strong>
 </div>
 
 <h3>Edit Episode <?= h($episode->episode) ?></h3>
 
 <div class="box wide">
-	<? $form->form_for($C->episode, ADMIN_ROOT . "episodes/update/" .
+	<? $form->form_for($C->episode, ADMIN_ROOT_URL . "episodes/update/" .
 	$episode->episode, array("multipart" => true), function($f) use ($C) { ?>
 		<?= $C->render(array("partial" => "form"), array("f" => $f)); ?>
 		<p>

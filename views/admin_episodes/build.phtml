@@ -1,11 +1,11 @@
 <div style="float: right;">
-	<strong><a href="<?= ADMIN_ROOT ?>">Cancel</a></strong>
+	<strong><a href="<?= ADMIN_ROOT_URL ?>">Cancel</a></strong>
 </div>
 
 <h3>New Episode</h3>
 
 <div class="box wide">
-	<? $form->form_for($C->episode, ADMIN_ROOT . "episodes/create",
+	<? $form->form_for($C->episode, ADMIN_ROOT_URL . "episodes/create",
 	array("multipart" => true), function($f) use ($C) { ?>
 		<?= $C->render(array("partial" => "form"), array("f" => $f)); ?>
 		<p>
