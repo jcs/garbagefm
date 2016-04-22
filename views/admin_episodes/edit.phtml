@@ -9,7 +9,7 @@
 	<strong><a href="<?= ADMIN_ROOT_URL ?>">Cancel</a></strong>
 </div>
 
-<? if ($C->episode->title) { ?>
+<? if ($C->episode->title && !$C->episode->is_pending) { ?>
 	<h3>Announce Episode <?= h($episode->episode) ?></h3>
 
 	<div class="box wide">
