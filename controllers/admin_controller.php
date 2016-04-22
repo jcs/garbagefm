@@ -106,6 +106,57 @@ class AdminController extends ApplicationController {
 	public function show_settings() {
 	}
 
+	public function twitter_auth() {
+		$rt = Twitter::new_request_token(ADMIN_ROOT_URL . "twitter_verify");
+
+		$_SESSION["twitter_token"] = $rt["oauth_token"];
+		$_SESSION["twitter_secret"] = $rt["oauth_token_secret"];
+
+		try {
+			return $this->redirect_to(Twitter::new_authorize_url(
+				$rt["oauth_token"]));
+		}
+		catch (Exception $e) {
+			\HalfMoon\Log::error("couldn't get url for twitter authorization: "
+				. $e->getMessage());
+			$this->add_flash_error("Could not add Twitter account.");
+			return $this->redirect_to(ADMIN_ROOT_URL . "show_settings");
+		}
+	}
+
+	/* we'll get back to here from a twitter.com redirect */
+	public function twitter_verify() {
+		$tt = @$_SESSION["twitter_token"];
+		$ts = @$_SESSION["twitter_secret"];
+
+		unset($_SESSION["twitter_token"]);
+		unset($_SESSION["twitter_secret"]);
+
+		if (!empty($this->params["denied"])) {
+			/* user clicked cancel */
+			$this->add_flash_notice("Twitter authentication canceled.");
+			return $this->redirect_to(ADMIN_ROOT_URL . "show_settings");
+		}
+
+		try {
+			if (empty($tt) || $this->params["oauth_token"] !== $tt)
+				throw new Exception("invalid oauth token received back");
+
+			if (Twitter::verify_oauth_credentials($tt, $ts,
+			$this->params["oauth_verifier"])) {
+				$this->add_flash_success("Twitter account has been "
+					. "authenticated.");
+				return $this->redirect_to(ADMIN_ROOT_URL . "show_settings");
+			}
+			else
+				throw new Exception("verification failed");
+		}
+		catch (Exception $e) {
+			$this->add_flash_error("Could not authenticate Twitter account.");
+			return $this->redirect_to(ADMIN_ROOT_URL . "show_settings");
+		}
+	}
+
 	public function update_notes() {
 		$this->user->upcoming_notes = $this->params["upcoming_notes"];
 		$this->user->save();

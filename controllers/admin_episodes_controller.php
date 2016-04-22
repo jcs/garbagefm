@@ -71,7 +71,8 @@ class AdminEpisodesController extends ApplicationController {
 		if ($this->episode->update_attributes($this->params["episode"])) {
 			$this->add_flash_success("Successfully updated episode " .
 				h($this->episode->episode));
-			return $this->redirect_to(ADMIN_ROOT_URL);
+			return $this->redirect_to(ADMIN_ROOT_URL . "episodes/edit/"
+				. $this->episode->episode);
 		}
 		else {
 			return $this->render(array("action" => "edit"));
@@ -83,6 +84,27 @@ class AdminEpisodesController extends ApplicationController {
 		$this->episode->notes = $this->params["preview_text"];
 
 		return $this->render(array("partial" => "preview", "layout" => false));
+	}
+
+	public function tweet() {
+		$json = json_decode(Twitter::oauth_request("/1.1/statuses/update.json?"
+			. "include_entities=1&wrap_links=true", "POST",
+			array("status" => $this->params["tweet"])), true);
+
+		if ($json["id"]) {
+			$tweet = "https://twitter.com/"
+				. Settings::fetch()->twitter_username . "/status/"
+				. $json["id"];
+
+			$this->add_flash_success(raw("Successfully Tweeted: <a href=\""
+				. $tweet . "\" target=\"_blank\">" . $tweet . "</a>"));
+		}
+		else {
+			\HalfMoon\Log::error_log_r($json);
+			$this->add_flash_error("Could not send tweet");
+		}
+
+		return $this->redirect_to(ADMIN_ROOT_URL);
 	}
 }
 

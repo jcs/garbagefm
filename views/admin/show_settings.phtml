@@ -28,6 +28,12 @@
 		<?= $f->label("twitter_username", "Twitter Username:",
 			array("class" => "required")); ?>
 		@ <?= $f->text_field("twitter_username") ?>
+		<? if ($f->form_object->can_tweet) { ?>
+			(Authenticated)
+		<? } else { ?>
+			(<a href="<?= ADMIN_ROOT_URL ?>twitter_auth">Authenticate to
+				Twitter</a>)
+		<? } ?>
 		</div>
 
 		<div class="boxline">

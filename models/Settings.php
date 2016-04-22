@@ -19,6 +19,13 @@ class Settings extends ActiveRecord\Model {
 
 		return $prompts;
 	}
+
+	public function get_can_tweet() {
+		return (defined(TWITTER_CONSUMER_KEY) && TWITTER_CONSUMER_KEY &&
+			defined(TWITTER_CONSUMER_SECRET) && TWITTER_CONSUMER_SECRET &&
+			$this->twitter_oauth_token != "" &&
+			$this->twitter_oauth_secret != "");
+	}
 }
 
 ?>

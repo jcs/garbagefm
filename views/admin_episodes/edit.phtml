@@ -9,6 +9,23 @@
 	<strong><a href="<?= ADMIN_ROOT_URL ?>">Cancel</a></strong>
 </div>
 
+<? if ($C->episode->title) { ?>
+	<h3>Announce Episode <?= h($episode->episode) ?></h3>
+
+	<div class="box wide">
+	<? $form->form_tag(ADMIN_ROOT_URL . "episodes/tweet", array(),
+	function($f) use ($C, $helper) { ?>
+		<div class="boxline">
+		<?= $f->text_area_tag("tweet",
+			strtolower($helper->settings()->name)
+			. "[" . $C->episode->episode . "]: " . $C->episode->title . "\n"
+			. $C->episode->absolute_url); ?>
+		<?= $f->submit_tag("Tweet"); ?>
+		</div>
+	<? }); ?>
+	</div>
+<? } ?>
+
 <h3>Edit Episode <?= h($episode->episode) ?></h3>
 
 <div class="box wide">

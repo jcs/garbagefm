@@ -9,6 +9,9 @@ define(ADMIN_ROOT_DOMAIN, "garbage.fm");
 define(ADMIN_ROOT_PATH, "/adm1n/");
 define(ADMIN_ROOT_URL, "https://" . ADMIN_ROOT_DOMAIN . ADMIN_ROOT_PATH);
 
+define(TWITTER_CONSUMER_KEY, $_ENV["TWITTER_CONSUMER_KEY"]);
+define(TWITTER_CONSUMER_SECRET, $_ENV["TWITTER_CONSUMER_SECRET"]);
+
 /* session settings, change according to your application requirements */
 session_name("_garbagefm_session");
 session_set_cookie_params($lifetime = (60 * 60 * 24 * 7), "/",
@@ -20,7 +23,7 @@ HalfMoon\Config::set_session_store(
 
 	/* you must define a random encryption key here of 32 characters.
 	 * "openssl rand 16 -hex" will generate one for you. */
-	array("encryption_key" => ENV["COOKIE_ENCRYPTION_KEY"]);
+	array("encryption_key" => $_ENV["COOKIE_ENCRYPTION_KEY"]);
 );
 
 /* a timezone is required for DateTime functions */
@@ -58,7 +61,8 @@ elseif (HALFMOON_ENV == "production") {
 	HalfMoon\Config::set_cache_store_path(HALFMOON_ROOT . "/public/cache");
 
 	/* uncomment to send emails of error backtraces and debugging info */
-	HalfMoon\Config::set_exception_notification_recipient("jcs@jcs.org");
+	HalfMoon\Config::set_exception_notification_recipient(
+		$_ENV["EXCEPTION_NOTIFICATION_RECIPIENT"]);
 	HalfMoon\Config::set_exception_notification_subject("[garbagefm]");
 }
 

@@ -54,6 +54,13 @@ class ApplicationHelper extends HalfMoon\Helper {
 
 		return $out;
 	}
+
+	public function settings() {
+		if (!$this->_settings)
+			$this->_settings = Settings::fetch();
+
+		return $this->_settings;
+	}
 }
 
 ?>
