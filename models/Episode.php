@@ -34,6 +34,10 @@ class Episode extends ActiveRecord\Model {
 		return Settings::fetch()->url . $this->file_path;
 	}
 
+	public function get_secure_mp3_url() {
+		return Settings::fetch()->secure_url . $this->file_path;
+	}
+
 	public function get_mp3_path() {
 		return HALFMOON_ROOT . "/public/" . $this->file_path;
 	}
@@ -48,6 +52,14 @@ class Episode extends ActiveRecord\Model {
 			return $this->custom_artwork_url;
 		else
 			return Settings::fetch()->logo_url;
+	}
+
+	public function get_secure_artwork_url() {
+		if ($this->custom_artwork_url)
+			return preg_replace("/^http:/i", "https:",
+				$this->custom_artwork_url);
+		else
+			return Settings::fetch()->secure_logo_url;
 	}
 
 	public function set_notes($notes) {

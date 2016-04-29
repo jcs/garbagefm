@@ -6,12 +6,18 @@
 			h($C->page_title) : "" ?></title>
 		<link rel="shortcut icon" href="/favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<? if (isset($C->meta_headers)) { ?>
+			<? foreach ($C->meta_headers as $k => $v) { ?>
+				<meta name="<?= h($k) ?>" content="<?= h($v) ?>" />
+			<? } ?>
+		<? } ?>
 		<link rel="alternate" type="application/rss+xml" title="RSS Feed"
 			href="<?= $C->settings()->url ?>episodes.rss"/>
 		<style>
 			body {
 				color: #333;
 				background-color: #fcfcfc;
+				padding-bottom: 2em;
 			}
 
 			body, code {
@@ -68,7 +74,7 @@
 			}
 
 			.episodes, .episodes_pager {
-				margin: 2em auto 4em auto;
+				margin: 2em auto;
 				width: 600px;
 			}
 
@@ -165,6 +171,8 @@
 			<p class="subscribes">
 			Subscribe:
 			<a href="/episodes.rss">RSS</a>
+			|
+			<a href="<?= h($C->settings()->googleplay_url) ?>">Play Music</a>
 			|
 			<a href="<?= h($C->settings()->itunes_url) ?>">iTunes</a>
 			|

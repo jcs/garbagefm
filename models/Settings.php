@@ -26,6 +26,14 @@ class Settings extends ActiveRecord\Model {
 			$this->twitter_oauth_token != "" &&
 			$this->twitter_oauth_secret != "");
 	}
+
+	public function get_secure_url() {
+		return preg_replace("/^http:/i", "https:", $this->url);
+	}
+
+	public function get_secure_logo_url() {
+		return preg_replace("/^http:/i", "https:", $this->logo_url);
+	}
 }
 
 ?>

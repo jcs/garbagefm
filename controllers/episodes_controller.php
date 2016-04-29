@@ -34,6 +34,26 @@ class EpisodesController extends ApplicationController {
 
 		$this->page_title = $this->episode->episode . ": "
 			. $this->episode->title;
+
+		$this->meta_headers = array(
+			"og:title" => strtolower(Settings::fetch()->name) . "["
+				. $this->episode->episode . "]: " . $this->episode->title,
+			"og:image" => $this->episode->secure_artwork_url,
+			"twitter:card" => "player",
+			"twitter:site" => "@" . Settings::fetch()->twitter_username,
+			"twitter:player" => Settings::fetch()->secure_url
+				. "episodes/twitter_card/" . $this->episode->episode,
+			"twitter:player:width" => "290",
+			"twitter:player:height" => "58",
+			"twitter:player:stream" => $this->episode->secure_mp3_url,
+			"twitter:player:stream:content_type" => "audio/mpeg",
+		);
+	}
+
+	public function twitter_card() {
+		$this->show();
+
+		$this->render(array("action" => "twitter_card", "layout" => false));
 	}
 
 	protected function find_episodes($page = -1) {
