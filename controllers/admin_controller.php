@@ -59,24 +59,7 @@ class AdminController extends ApplicationController {
 	}
 
 	public function flushcache() {
-		if (\HalfMoon\Utils::is_blank(\HalfMoon\Config::instance()->cache_store_path))
-			return redirect_to(ADMIN_ROOT_URL);
-
-		$deleted = 0;
-
-		$fs = new RecursiveIteratorIterator(
-			new RecursiveDirectoryIterator(\HalfMoon\Config::instance()->cache_store_path),
-			RecursiveIteratorIterator::SELF_FIRST);
-		foreach($fs as $name => $object) {
-			if (is_file($name)) {
-				unlink($name);
-				$deleted++;
-			}
-		}
-
-		$this->add_flash_success("Deleted " . $deleted . " cached file"
-			. ($deleted == 1 ? "" : "s"));
-
+		$this->flush_cache();
 		return $this->redirect_to(ADMIN_ROOT_URL);
 	}
 

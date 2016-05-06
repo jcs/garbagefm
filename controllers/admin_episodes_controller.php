@@ -71,6 +71,9 @@ class AdminEpisodesController extends ApplicationController {
 		if ($this->episode->update_attributes($this->params["episode"])) {
 			$this->add_flash_success("Successfully updated episode " .
 				h($this->episode->episode));
+
+			$this->flush_cache();
+
 			return $this->redirect_to(ADMIN_ROOT_URL . "episodes/edit/"
 				. $this->episode->episode);
 		}
