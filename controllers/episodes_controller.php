@@ -32,6 +32,12 @@ class EpisodesController extends ApplicationController {
 			throw new \ActiveRecord\RecordNotFound("can't find episode "
 				. $this->params["id"]);
 
+		$this->next_episode = Episode::find_by_episode(
+			$this->episode->episode + 1);
+		if ($this->episode->episode > 0)
+			$this->prev_episode = Episode::find_by_episode(
+				$this->episode->episode - 1);
+
 		$this->page_title = $this->episode->episode . ": "
 			. $this->episode->title;
 

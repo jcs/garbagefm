@@ -4,3 +4,21 @@
 </div>
 
 <hr>
+
+<? if ($prev_episode || $next_episode) { ?>
+	<div class="episodes_pager">
+		<? if ($next_episode) { ?>
+			<p>
+			&lt;&lt; <a href="<?= h($next_episode->absolute_url)
+				?>">garbage[<?= h($next_episode->episode) ?>]:
+				<?= h($next_episode->title) ?></a>
+			</p>
+		<? } ?>
+
+		<p>
+		<a href="<?= h($prev_episode->absolute_url)
+			?>">garbage[<?= h($prev_episode->episode) ?>]:
+			<?= h($prev_episode->title) ?></a> &gt;&gt;
+		</p>
+	</div>
+<? } ?>
