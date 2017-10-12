@@ -5,12 +5,12 @@
 	should do per-environment setup like logging, tweaking php settings, etc.
 */
 
-define(ADMIN_ROOT_DOMAIN, "garbage.fm");
-define(ADMIN_ROOT_PATH, "/adm1n/");
-define(ADMIN_ROOT_URL, "https://" . ADMIN_ROOT_DOMAIN . ADMIN_ROOT_PATH);
+define("ADMIN_ROOT_DOMAIN", "garbage.fm");
+define("ADMIN_ROOT_PATH", "/adm1n/");
+define("ADMIN_ROOT_URL", "https://" . ADMIN_ROOT_DOMAIN . ADMIN_ROOT_PATH);
 
-define(TWITTER_CONSUMER_KEY, $_ENV["TWITTER_CONSUMER_KEY"]);
-define(TWITTER_CONSUMER_SECRET, $_ENV["TWITTER_CONSUMER_SECRET"]);
+define("TWITTER_CONSUMER_KEY", $_ENV["TWITTER_CONSUMER_KEY"]);
+define("TWITTER_CONSUMER_SECRET", $_ENV["TWITTER_CONSUMER_SECRET"]);
 
 /* session settings, change according to your application requirements */
 session_name("_garbagefm_session");
