@@ -9,6 +9,11 @@
 			body {
 				margin: 0;
 				background-color: #fcfcfc;
+				font-family: sans-serif;
+				font-size: 10pt;
+			}
+			a {
+				color: gray;
 			}
 		</style>
 	</head>
@@ -24,6 +29,11 @@
 				<source src="<?= h($C->episode->secure_mp3_url) ?>" type="audio/mpeg">
 				Your browser does not support the audio element
 			</audio>
+			<p>
+			<strong>Show notes:</strong>
+			<a href="<?= h($C->episode->absolute_url) ?>" target="_blank"><?=
+				h($C->episode->absolute_url) ?></a>
+			</p>
 		</div>
 
 		<div style="clear: both;"></div>

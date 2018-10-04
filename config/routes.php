@@ -61,6 +61,12 @@ HalfMoon\Router::addRoute(array(
 ));
 
 HalfMoon\Router::addRoute(array(
+	"url" => "episodes pending.rss",
+	"controller" => "episodes",
+	"action" => "rss_with_pending",
+));
+
+HalfMoon\Router::addRoute(array(
 	"url" => "episodes/:id",
 	"controller" => "episodes",
 	"action" => "show",

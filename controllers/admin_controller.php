@@ -142,6 +142,7 @@ class AdminController extends ApplicationController {
 
 	public function update_notes() {
 		$this->user->upcoming_notes = $this->params["upcoming_notes"];
+		$this->user->private_notes = $this->params["private_notes"];
 		$this->user->save();
 
 		$this->add_flash_success("Your upcoming show notes have been saved.");

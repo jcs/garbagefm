@@ -26,7 +26,12 @@
 	</div>
 <? } ?>
 
-<h3>Edit Episode <?= h($episode->episode) ?></h3>
+<h3>Edit Episode <?= h($episode->episode) ?>
+<? if ($episode->id) { ?>
+	(<a href="<?= ADMIN_ROOT_URL ?>episodes/preview/<?= $episode->episode
+	?>">Preview</a>)
+<? } ?>
+</h3>
 
 <div class="box wide">
 	<? $form->form_for($C->episode, ADMIN_ROOT_URL . "episodes/update/" .

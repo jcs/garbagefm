@@ -3,7 +3,7 @@
 class EpisodesController extends ApplicationController {
 	static $caches_page = array("home", "index", "show", "rss");
 
-	static $episodes_per_page = 5;
+	static $episodes_per_page = 10;
 
 	public function home() {
 		$page = 0;
@@ -26,14 +26,23 @@ class EpisodesController extends ApplicationController {
 		$this->render(array("action" => "rss"), array("layout" => false));
 	}
 
+	public function rss_with_pending() {
+		$this->find_episodes(-1, true);
+
+		header("Content-type: application/rss+xml; charset=UTF-8");
+		$this->render(array("action" => "rss"), array("layout" => false,
+			"with_pending" => true));
+	}
+
 	public function show() {
-		$this->episode = Episode::find_by_episode($this->params["id"]);
+		$this->episode = Episode::find_by_episode_and_is_pending(
+			$this->params["id"], false);
 		if (!$this->episode)
 			throw new \ActiveRecord\RecordNotFound("can't find episode "
 				. $this->params["id"]);
 
-		$this->next_episode = Episode::find_by_episode(
-			$this->episode->episode + 1);
+		$this->next_episode = Episode::find_by_episode_and_is_pending(
+			$this->episode->episode + 1, false);
 		if ($this->episode->episode > 0)
 			$this->prev_episode = Episode::find_by_episode(
 				$this->episode->episode - 1);
@@ -62,12 +71,18 @@ class EpisodesController extends ApplicationController {
 		$this->render(array("action" => "twitter_card", "layout" => false));
 	}
 
-	protected function find_episodes($page = -1) {
-		$count = Episode::count_by_is_pending(false);
+	protected function find_episodes($page = -1, $pending = false) {
+		$count = 0;
+		if ($pending)
+			$count = Episode::count();
+		else
+			$count = Episode::count_by_is_pending(false);
+
 		$this->pages = ceil($count / static::$episodes_per_page) - 1;
 
-		$conds = array("conditions" => "is_pending = 0",
-			"order" => "episode DESC");
+		$conds = array("order" => "episode DESC");
+		if (!$pending)
+			$conds["conditions"] = "is_pending = 0";
 
 		if ($page == -1) {
 			/* return all episodes */

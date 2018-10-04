@@ -1,11 +1,7 @@
 <div class="episode">
 	<div class="title">
-		<a href="<?= h($episode->absolute_url) ?>">
-			garbage[<?= h($episode->episode) ?>]: <?= h($episode->title) ?>
-		</a>
-		<? if ($episode->is_pending) { ?>
-			(PENDING)
-		<? } ?>
+		<a href="<?= h($episode->absolute_url) ?>"><?= h($episode->full_title)
+			?></a>
 		<div class="date">
 			<?= $episode->air_date->format("F jS, Y") ?>
 		</div>

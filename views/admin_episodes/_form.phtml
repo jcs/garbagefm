@@ -33,7 +33,14 @@ feeds)
 <?= $f->label("custom_artwork_url", "Custom Artwork URL:",
 	array("class" => "required")); ?>
 <?= $f->text_field("custom_artwork_url", array("style" => "width: 500px;",
-	"placeholder" => "Must be absolute URL")) ?>
+	"placeholder" => "Usually blank, otherwise must be absolute URL")) ?>
+</div>
+
+<div class="boxline">
+<?= $f->label("custom_author", "Custom Author:",
+	array("class" => "required")); ?>
+<?= $f->text_field("custom_author", array("style" => "width: 500px;",
+	"placeholder" => "Usually blank, can be used for solo or guest shows")) ?>
 </div>
 
 <div class="boxline">

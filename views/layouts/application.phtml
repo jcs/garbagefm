@@ -18,6 +18,7 @@
 				color: #333;
 				background-color: #fcfcfc;
 				padding-bottom: 2em;
+				line-height: 1.3em;
 			}
 
 			body, code {
@@ -65,7 +66,8 @@
 			}
 
 			p.subscribes,
-			p.feedbacks {
+			p.feedbacks,
+			p.merch {
 				font-size: 10pt;
 			}
 
@@ -122,6 +124,15 @@
 					margin: 5px 15px;
 				}
 
+				.lead .show_subtitle {
+					font-size: 9pt;
+				}
+
+				p.subscribes,
+				p.feedbacks {
+					font-size: 9pt;
+				}
+
 				.episodes, .episodes_pager {
 					width: 99%;
 				}
@@ -152,9 +163,9 @@
 	<body>
 		<div class="lead">
 			<div class="logo">
-				<a href="/"><img src="/garbage-128.png"
-					srcset="/garbage-128.png 1x, /garbage-256.png 2x"
-					width=128 height=128></a>
+				<a href="/"><img src="/garbage-64.png"
+					srcset="/garbage-64.png 1x, /garbage-128.png 2x"
+					width=64 height=64></a>
 			</div>
 
 			<div class="show_title">
@@ -192,7 +203,15 @@
 				h($C->settings()->twitter_username) ?>">Twitter</a>
 			</p>
 
-			<p class="feedbacks">
+			<p class="merch">
+			<? if (false) { ?>
+			Support the Show:
+			<a href="https://shop.spreadshirt.com/garbagefm/">T-shirts</a>
+			|
+			<a
+			href="https://www.stickermule.com/user/1070474053/stickers">Stickers</a>
+			&nbsp;
+			<? } ?>
 			Feedback:
 			<a href="https://twitter.com/<?=
 				h($C->settings()->twitter_username) ?>">Twitter</a>

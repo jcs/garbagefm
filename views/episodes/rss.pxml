@@ -10,10 +10,10 @@
 <channel>
 	<title><?= h($C->settings()->name) ?></title>
 	<link><?= h($C->settings()->url) ?></link>
-	<atom:link href="<?= h($C->settings()->url) ?>episodes.rss" rel="self" type="application/rss+xml"/>
+	<atom:link href="<?= h($C->settings()->url) ?>episodes<?= $with_pending ? "+pending" : "" ?>.rss" rel="self" type="application/rss+xml"/>
 	<lastBuildDate><?= date("r"); ?></lastBuildDate>
 	<language>en-US</language>
-	<itunes:author><?= $helper->joined_host_names($C) ?></itunes:author>
+	<itunes:author><?= h($helper->joined_host_names($C)) ?></itunes:author>
 	<itunes:subtitle><?= h($C->settings()->description) ?></itunes:subtitle>
 	<itunes:summary><?= h($C->settings()->description) ?></itunes:summary>
 	<description><?= h($C->settings()->description) ?></description>
@@ -27,19 +27,21 @@
 	<itunes:image href="<?= h($C->settings()->logo_url) ?>"/>
 	<? foreach ($C->episodes as $episode) { ?>
 		<item>
-			<title>garbage[<?= h($episode->episode) ?>]: <?= h($episode->title) ?></title>
+			<title><?= h($episode->full_title) ?></title>
 			<pubDate><?= $episode->air_date->format("r") ?></pubDate>
 			<link><?= h($episode->absolute_url) ?></link>
-			<guid isPermaLink="false"><?= h($episode->absolute_url) ?></guid>
+			<guid isPermaLink="false"><?= h($episode->guid) ?></guid>
 			<description><![CDATA[
 				<?= $episode->notes_html ?>
-				<p>
-				We welcome your feedback at <a
-				href="https://twitter.com/garbagefm">@garbagefm</a> on Twitter
-				and at <a href="http://garbage.fm/">http://garbage.fm</a>
-				</p>]]></description>
-			<dc:creator><?= $helper->joined_host_names($C) ?></dc:creator>
-			<itunes:author><?= $helper->joined_host_names($C) ?></itunes:author>
+				<?= $C->settings()->show_notes_trailer ?>
+				]]></description>
+			<? if ($episode->custom_author) { ?>
+				<dc:creator><?= h($episode->custom_author) ?></dc:creator>
+				<itunes:author><?= h($episode->custom_author) ?></itunes:author>
+			<? } else { ?>
+				<dc:creator><?= h($helper->joined_host_names($C)) ?></dc:creator>
+				<itunes:author><?= h($helper->joined_host_names($C)) ?></itunes:author>
+			<? } ?>
 			<itunes:summary><?= h($episode->summary) ?></itunes:summary>
 			<itunes:explicit><?= $episode->is_explicit ? "yes" : "no" ?></itunes:explicit>
 			<itunes:duration><?= h($episode->duration) ?></itunes:duration>

@@ -76,6 +76,13 @@
 			"style" => "height: 7em;")) ?>
 		</div>
 
+		<div class="boxline">
+		<?= $f->label("show_notes_trailer", "Show Notes Trailer:",
+			array("class" => "required")); ?>
+		<?= $f->text_area("show_notes_trailer", array("class" => "variable",
+			"style" => "height: 7em;")) ?>
+		</div>
+
 		<p>
 		<?= $f->submit_tag("Update"); ?>
 		</p>

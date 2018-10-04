@@ -9,11 +9,25 @@
 	<? $form->form_tag(ADMIN_ROOT_URL . "update_notes", array(),
 	function($f) use ($C) { ?>
 		<div class="boxline">
-			<?= $f->label_tag("upcoming_notes", $C->user->username . ":",
+			<?= $f->label_tag("private_notes", "Private:",
+				array("class" => "required")); ?>
+			<?= $f->text_area_tag("private_notes", $C->user->private_notes,
+				array("class" => "variable",
+				"style" => "width: 75%; line-height: 1.3em; height: " .
+				((max(substr_count($C->user->private_notes,
+					"\n"), 8) * 1.5) + 2) .
+				"em; font-size: 9pt;")); ?>
+			<br>
+		</div>
+		<div class="boxline">
+			<?= $f->label_tag("upcoming_notes", "Shared:",
 				array("class" => "required")); ?>
 			<?= $f->text_area_tag("upcoming_notes", $C->user->upcoming_notes,
 				array("class" => "variable",
-				"style" => "width: 75%; height: 10em; font-size: 9pt;")); ?>
+				"style" => "width: 75%; line-height: 1.3em; height: " .
+				((max(substr_count($C->user->upcoming_notes,
+					"\n"), 8) * 1.5) + 2) .
+				"em; font-size: 9pt;")); ?>
 			<br>
 			<?= $f->submit_tag("Save"); ?>
 		</div>
