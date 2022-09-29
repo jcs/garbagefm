@@ -10,3 +10,6 @@
 [submodule "lib/parsedown"]
 	path = lib/parsedown
 	url = git@github.com:erusev/parsedown.git
+[submodule "halfmoon"]
+	path = halfmoon
+	url = git@github.com:jcs/halfmoon.git
